@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\ImportExport\Exporter;
 
-use Sylius\Component\ImportExport\Model\ExporterInterface;
+use Sylius\Component\ImportExport\Model\ExportProfile;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
@@ -36,12 +36,12 @@ class DelegatingExporter implements DelegatingExporterInterface
         $this->registry = $registry;
     }
 
-    public function export(ExporterInterface $exporter)
+    public function export(ExportProfile $exportProfile)
     {
-        if (null === $type = $exporter->getExporter()) {
-            throw new \InvalidArgumentException('Cannot export data with ExporterInterface instance without exporter defined.');
+        if (null === $type = $exportProfile->getExporter()) {
+            throw new \InvalidArgumentException('Cannot export data with ExportProfile instance without exporter defined.');
         }
         $exporter = $this->registry->get($type);
-        return $exporter->export($exporter->getEntity(), $exporter->getFields(), $exporter->getExporterConfiguration());
+        return $exporter->export($exportProfile->getEntity(), $exportProfile->getFields(), $exportProfile->getExporterConfiguration());
     }
 }

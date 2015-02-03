@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\ImportExport\Exporter;
 
-use Sylius\Component\ImportExport\Model\ExporterInterface;
+use Sylius\Component\ImportExport\Model\ExportProfile;
 
 /**
  * @author Mateusz Zalewski <zaleslaw@.gmail.com>
@@ -25,5 +25,5 @@ interface DelegatingExporterInterface
      *
      * @return integer
      */
-    public function export(ExporterInterface $exporter);
+    public function export(ExportProfile $exporter);
 }

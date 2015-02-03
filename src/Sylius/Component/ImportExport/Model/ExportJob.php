@@ -38,7 +38,7 @@ class ExportJob extends Job
      *
      * @return self
      */
-    private function _setExportProfile(ExportProfile $exportProfile)
+    private function setExportProfile(ExportProfile $exportProfile)
     {
         $this->exportProfile = $exportProfile;
 
