@@ -38,10 +38,10 @@ class DelegatingExporter implements DelegatingExporterInterface
 
     public function export(ExporterInterface $exporter)
     {
-        if (null === $type = $subject->getExporter()) {
+        if (null === $type = $exporter->getExporter()) {
             throw new \InvalidArgumentException('Cannot export data with ExporterInterface instance without exporter defined.');
         }
         $exporter = $this->registry->get($type);
-        return $exporter->export($subject);
+        return $exporter->export($exporter->getEntity(), $exporter->getFields(), $exporter->getExporterConfiguration());
     }
 }
