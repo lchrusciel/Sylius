@@ -19,5 +19,29 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
  */
 class DelegatingExporter implements DelegatingExporterInterface
 {
-    
+    /**
+     * Exporter registry
+     *
+     * @var ServiceRegistryInterface
+     */
+    private $registry;
+
+    /**
+     * Constructor
+     *
+     * @var ServiceRegistryInterface $registry
+     */
+    public function __construct(ServiceRegistryInterface $registry)
+    {
+        $this->registry = $registry;
+    }
+
+    public function export(ExporterInterface $exporter)
+    {
+        if (null === $type = $subject->getExporter()) {
+            throw new \InvalidArgumentException('Cannot export data with ExporterInterface instance without exporter defined.');
+        }
+        $exporter = $this->registry->get($type);
+        return $exporter->export($subject);
+    }
 }

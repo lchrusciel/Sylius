@@ -25,5 +25,5 @@ interface DelegatingExporterInterface
      *
      * @return integer
      */
-    public function export(ExporterInterface $exporter, Data $data);
+    public function export(ExporterInterface $exporter);
 }
