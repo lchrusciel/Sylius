@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6f85fa0b94f04a7e1477907456eb1628",
+    "hash": "0f7ba8770cae586cdfe8f52d1f9a4e9b",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -147,16 +147,16 @@
         },
         {
             "name": "ddeboer/data-import",
-            "version": "0.17.0",
+            "version": "dev-datetime-to-string",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ddeboer/data-import.git",
-                "reference": "c06703dcdd9bda101ee4771f14c0f0416c54c5dd"
+                "url": "https://github.com/Zales0123/data-import.git",
+                "reference": "3f2ecb4d8f877df5bc129bf4e31f0de78b2b4e3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ddeboer/data-import/zipball/c06703dcdd9bda101ee4771f14c0f0416c54c5dd",
-                "reference": "c06703dcdd9bda101ee4771f14c0f0416c54c5dd",
+                "url": "https://api.github.com/repos/Zales0123/data-import/zipball/3f2ecb4d8f877df5bc129bf4e31f0de78b2b4e3b",
+                "reference": "3f2ecb4d8f877df5bc129bf4e31f0de78b2b4e3b",
                 "shasum": ""
             },
             "require": {
@@ -170,6 +170,7 @@
                 "ext-mbstring": "*",
                 "ext-sqlite3": "*",
                 "phpoffice/phpexcel": "*",
+                "phpunit/phpunit": "3.7.*",
                 "symfony/console": "~2.5.0",
                 "symfony/property-access": "*",
                 "symfony/validator": "~2.3.0"
@@ -189,18 +190,17 @@
                     "Ddeboer\\DataImport": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "The community",
-                    "homepage": "https://github.com/ddeboer/data-import/graphs/contributors"
-                },
-                {
                     "name": "David de Boer",
                     "email": "david@ddeboer.nl"
+                },
+                {
+                    "name": "The community",
+                    "homepage": "https://github.com/ddeboer/data-import/graphs/contributors"
                 }
             ],
             "description": "Import data from, and export data to, a range of file formats and media",
@@ -212,7 +212,11 @@
                 "export",
                 "import"
             ],
-            "time": "2015-01-22 21:03:19"
+            "support": {
+                "issues": "https://github.com/ddeboer/data-import/issues",
+                "source": "https://github.com/ddeboer/data-import"
+            },
+            "time": "2015-02-04 10:32:49"
         },
         {
             "name": "doctrine/annotations",
@@ -9274,7 +9278,7 @@
         "knplabs/knp-snappy-bundle": 20,
         "mathiasverraes/money": 20,
         "willdurand/hateoas-bundle": 0,
-        "ddeboer/data-import": 0
+        "ddeboer/data-import": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

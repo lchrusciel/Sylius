@@ -38,6 +38,7 @@
         "sylius/contact-bundle":          "0.13.*@dev",
         "sylius/content-bundle":          "0.13.*@dev",
         "sylius/flow-bundle":             "0.13.*@dev",
+        "sylius/import-export-bundle":    "0.13.*@dev",
         "sylius/inventory-bundle":        "0.13.*@dev",
         "sylius/money-bundle":            "0.13.*@dev",
         "sylius/currency-bundle":         "0.13.*@dev",

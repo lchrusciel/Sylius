@@ -142,3 +142,11 @@ sylius_backend_security:
 sylius_backend_content:
     resource: @SyliusWebBundle/Resources/config/routing/backend/content/main.yml
     prefix: /content
+
+sylius_backend_export_profile:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/export_profile.yml
+    prefix: /export-profile
+
+sylius_backend_export_job:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/export_job.yml
+    prefix: /export-job

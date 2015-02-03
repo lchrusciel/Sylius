@@ -14,37 +14,37 @@ namespace Sylius\Component\ImportExport\Model;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class Job implements JobInterface
+abstract class Job implements JobInterface
 {
     /**
      * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $status;
+    protected $status;
 
     /**
      * @var \DateTime
      */
-    private $startTime;
+    protected $startTime;
 
     /**
      * @var \DateTime
      */
-    private $endTime;
+    protected $endTime;
 
     /**
      * @var \DateTime
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var \DateTime
      */
-    private $updatedAt;
+    protected $updatedAt;
 
     /**
      * Gets the value of id.

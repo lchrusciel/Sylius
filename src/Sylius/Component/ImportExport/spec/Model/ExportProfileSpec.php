@@ -40,4 +40,35 @@ class ExportProfileSpec extends ObjectBehavior
         $this->setExporterConfiguration($exporterConfiguration);
         $this->getExporterConfiguration()->shouldReturn($exporterConfiguration);
     }
+
+    public function it_has_name()
+    {
+        $this->setName("testExportProfile");
+        $this->getName()->shouldReturn('testExportProfile');
+    }
+
+    public function it_has_code()
+    {
+        $this->setCode('testCode');
+        $this->getCode()->shouldReturn('testCode');
+    }
+
+    public function it_has_description()
+    {
+        $this->setDescription('testDescription');
+        $this->getDescription()->shouldReturn('testDescription');
+    }
+
+    public function it_has_entity()
+    {
+        $this->setEntity('testEntity');
+        $this->getEntity()->shouldReturn('testEntity');
+    }
+
+    public function it_has_fields()
+    {
+        $fields = array('field1', 'field2');
+        $this->setFields($fields);
+        $this->getFields()->shouldReturn($fields);
+    }
 }

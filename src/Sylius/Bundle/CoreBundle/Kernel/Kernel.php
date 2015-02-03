@@ -67,6 +67,7 @@ abstract class Kernel extends BaseKernel
             new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new \Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new \Sylius\Bundle\ApiBundle\SyliusApiBundle(),
+            new \Sylius\Bundle\ImportExportBundle\SyliusImportExportBundle(),
 
             new \Sonata\BlockBundle\SonataBlockBundle(),
             new \Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),

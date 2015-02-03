@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.registry.export.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+        
+        <parameter key="sylius.import_export.exporter.class">Sylius\Component\ImportExport\Exporter\DelegatingExporter</parameter>
+        <parameter key="sylius.form.type.exporter_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\ExporterChoiceType</parameter>
+        
+        <parameter key="sylius.import_export.csv_exporter.class">Sylius\Bundle\ImportExportBundle\Exporter\CsvExporter</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.registry.exporter" class="%sylius.registry.export.class%">
+            <argument>Sylius\Component\ImportExport\Exporter\ExporterInterface</argument>
+        </service>
+        
+        <service id="sylius.import_export.exporter" class="%sylius.import_export.exporter.class%">
+            <argument type="service" id="sylius.registry.exporter" />
+        </service>
+        
+        <service id="sylius.form.type.exporter_choice" class="%sylius.form.type.exporter_choice.class%">
+            <argument>%sylius.exporters%</argument>
+            <tag name="form.type" alias="sylius_exporter_choice" />
+        </service>
+
+        <service id="sylius.import_export.csv_exporter" class="%sylius.import_export.csv_exporter.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="sylius.exporter" exporter="csv_exporter" label="CSV exporter" />
+        </service>
+    </services>
+
+</container>
