@@ -14,7 +14,7 @@ namespace Sylius\Component\ImportExport\Model;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class Profile implements ProfileInterface
+abstract class Profile implements ProfileInterface
 {
     /**
      * @var integer

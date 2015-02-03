@@ -76,7 +76,7 @@
         "winzou/state-machine":                 "~0.1",
         "winzou/state-machine-bundle":          "~0.2",
         "payum/omnipay-bridge":                 "~0.12",
-        "ddeboer/data-import": "@stable"
+        "ddeboer/data-import":                  "@stable"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
