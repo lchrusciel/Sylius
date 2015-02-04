@@ -145,8 +145,8 @@ sylius_backend_content:
 
 sylius_backend_export_profile:
     resource: @SyliusWebBundle/Resources/config/routing/backend/export_profile.yml
-    prefix: /export-profile
+    prefix: /export-profiles
 
 sylius_backend_export_job:
     resource: @SyliusWebBundle/Resources/config/routing/backend/export_job.yml
-    prefix: /export-job
+    prefix: /export-profiles/{profileId}/jobs

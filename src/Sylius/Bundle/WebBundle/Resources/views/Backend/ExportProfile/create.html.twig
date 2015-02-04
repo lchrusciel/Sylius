@@ -4,12 +4,12 @@
 
 {% block javascripts %}
 {{ parent() }}
-{#{% javascripts output='assets/compiled/backend_export_profile.js'
+{% javascripts output='assets/compiled/backend_export_profile.js'
     'bundles/syliusimportexport/js/prototype-handler.js'
     'bundles/syliusimportexport/js/sylius-export-profile.js'
 %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}#}
+{% endjavascripts %}
 {% endblock %}
 
 {% block topbar %}
