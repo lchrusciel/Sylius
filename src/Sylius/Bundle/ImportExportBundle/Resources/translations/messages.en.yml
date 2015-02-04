@@ -3,9 +3,14 @@
 
 sylius:
     form:
+        exporter:
+            file: File path
+            csv:
+                delimiter: Delimiter
+                enclosure: Enclosure
+                add_header: Add header?
         rule:
             type: Rule type
 
         import.export:
             export: export
-           

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ImportExportBundle\Form\Type;
+namespace spec\Sylius\Bundle\ImportExportBundle\Form\Type\Exporter;
 
 use PhpSpec\ObjectBehavior;
 

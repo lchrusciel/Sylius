@@ -20,9 +20,10 @@
         <parameter key="sylius.registry.export.class">Sylius\Component\Registry\ServiceRegistry</parameter>
         
         <parameter key="sylius.import_export.exporter.class">Sylius\Component\ImportExport\Exporter\DelegatingExporter</parameter>
-        <parameter key="sylius.form.type.exporter_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\ExporterChoiceType</parameter>
+        <parameter key="sylius.form.type.exporter_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Exporter\ExporterChoiceType</parameter>
         
         <parameter key="sylius.import_export.csv_exporter.class">Sylius\Bundle\ImportExportBundle\Exporter\CsvExporter</parameter>
+        <parameter key="sylius.import_export.excel_exporter.class">Sylius\Bundle\ImportExportBundle\Exporter\ExcelExporter</parameter>
     </parameters>
 
     <services>
@@ -42,6 +43,10 @@
         <service id="sylius.import_export.csv_exporter" class="%sylius.import_export.csv_exporter.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <tag name="sylius.exporter" exporter="csv_exporter" label="CSV exporter" />
+        </service>
+        <service id="sylius.import_export.excel_exporter" class="%sylius.import_export.excel_exporter.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="sylius.exporter" exporter="excel_exporter" label="Excel exporter" />
         </service>
     </services>
 

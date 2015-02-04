@@ -28,6 +28,45 @@ class ExportJobSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\ImportExport\Model\Job');
     }
 
+    public function it_implements_export_job_interface()
+    {
+        $this->shouldImplement('Sylius\Component\ImportExport\Model\ExportJobInterface');
+    }
+
+    public function it_has_status()
+    {
+        $this->setStatus('new');
+        $this->getStatus()->shouldReturn('new');
+    }
+
+    public function it_has_start_time()
+    {
+        $startTime = new \DateTime('2015-01-01');
+        $this->setStartTime($startTime);
+        $this->getStartTime()->shouldReturn($startTime);
+    }
+
+    public function it_has_end_time()
+    {
+        $endTime = new \DateTime('2015-01-01');
+        $this->setEndTime($endTime);
+        $this->getEndTime()->shouldReturn($endTime);
+    }
+
+    public function it_has_created_at()
+    {
+        $createdAt = new \DateTime('2015-01-01');
+        $this->setCreatedAt($createdAt);
+        $this->getCreatedAt()->shouldReturn($createdAt);
+    }
+
+    public function it_has_updated_at()
+    {
+        $updatedAt = new \DateTime('2015-01-01');
+        $this->setUpdatedAt($updatedAt);
+        $this->getUpdatedAt()->shouldReturn($updatedAt);
+    }
+
     // public function it_has_export_profile()
     // {
     //     $exportProfile = new \Sylius\Component\ImportExport\ExportProfile();

@@ -15,10 +15,10 @@ use Doctrine\ORM\EntityManager;
 use Sylius\Component\ImportExport\Exporter\ExporterInterface;
 use Ddeboer\DataImport\Workflow;
 use Ddeboer\DataImport\Reader\DoctrineReader;
-use Ddeboer\DataImport\Reader\OneToManyReader;
 use Ddeboer\DataImport\Writer\CsvWriter;
 use Ddeboer\DataImport\Filter\CallbackFilter;
 use Ddeboer\DataImport\ValueConverter\DateTimeToStringValueConverter;
+
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
@@ -47,7 +47,7 @@ class CsvExporter implements ExporterInterface
 
         $this->setDateTimeToStringConverter($workflow, $entity);
 
-        $csvWriter = new CsvWriter();
+        $csvWriter = new CsvWriter($configuration["delimiter"], $configuration["enclosure"]);
         $csvWriter->setStream(fopen($configuration["file"], 'w'));
         $workflow->addWriter($csvWriter);
 
