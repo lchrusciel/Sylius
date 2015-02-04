@@ -39,4 +39,9 @@ class ExcelExporter implements ExporterInterface
                ->process()
         ;
     }
+
+    public function getName()
+    {
+        return 'excel_exporter';
+    }
 }

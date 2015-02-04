@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0f7ba8770cae586cdfe8f52d1f9a4e9b",
+    "hash": "c4ba44a8226e8ddea7665d7ca364dc95",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -147,16 +147,16 @@
         },
         {
             "name": "ddeboer/data-import",
-            "version": "dev-datetime-to-string",
+            "version": "dev-doctrine-reader-field-names",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Zales0123/data-import.git",
-                "reference": "3f2ecb4d8f877df5bc129bf4e31f0de78b2b4e3b"
+                "reference": "b27b97a7fb1c7c6be2ff4cbf9351832b637e47ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Zales0123/data-import/zipball/3f2ecb4d8f877df5bc129bf4e31f0de78b2b4e3b",
-                "reference": "3f2ecb4d8f877df5bc129bf4e31f0de78b2b4e3b",
+                "url": "https://api.github.com/repos/Zales0123/data-import/zipball/b27b97a7fb1c7c6be2ff4cbf9351832b637e47ad",
+                "reference": "b27b97a7fb1c7c6be2ff4cbf9351832b637e47ad",
                 "shasum": ""
             },
             "require": {
@@ -216,7 +216,7 @@
                 "issues": "https://github.com/ddeboer/data-import/issues",
                 "source": "https://github.com/ddeboer/data-import"
             },
-            "time": "2015-02-04 10:32:49"
+            "time": "2015-02-04 13:44:15"
         },
         {
             "name": "doctrine/annotations",

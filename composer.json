@@ -82,7 +82,7 @@
         "winzou/state-machine":                 "~0.1",
         "winzou/state-machine-bundle":          "~0.2",
         "payum/omnipay-bridge":                 "~0.12",
-        "ddeboer/data-import":                  "dev-datetime-to-string"
+        "ddeboer/data-import":                  "dev-doctrine-reader-field-names"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
