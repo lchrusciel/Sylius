@@ -17,7 +17,7 @@ use Ddeboer\DataImport\Workflow;
 use Ddeboer\DataImport\Reader\DoctrineReader;
 use Ddeboer\DataImport\Writer\CsvWriter;
 use Ddeboer\DataImport\Filter\CallbackFilter;
-
+use Ddeboer\DataImport\ValueConverter\DateTimeToStringValueConverter;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
@@ -46,12 +46,19 @@ class CsvExporter implements ExporterInterface
         $csvWriter = new CsvWriter();
         $csvWriter->setStream(fopen($configuration["file"], 'w'));
 
-        $callbackFilter = new CallbackFilter();
+        $workflow->addWriter($csvWriter);
 
-        return $workflow
-               ->addWriter($csvWriter)
-               ->addFilter($callbackFilter)
-               ->process()
+        $converter = new DateTimeToStringValueConverter();
+
+        $workflow
+               ->addValueConverter('available_on', $converter)
+               ->addValueConverter('created_at', $converter)
+               ->addValueConverter('updated_at', $converter)
+               ->addValueConverter('deleted_at', $converter)
         ;
+
+        // var_dump($workflow); exit;
+
+        return $workflow->process();
     }
 }

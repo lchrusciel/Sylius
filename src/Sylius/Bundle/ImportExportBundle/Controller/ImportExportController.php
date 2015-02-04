@@ -18,6 +18,6 @@ class ShipmentController extends ResourceController
 {
     public function exportAction(Request $request)
     {
-            
+        
     }
 }

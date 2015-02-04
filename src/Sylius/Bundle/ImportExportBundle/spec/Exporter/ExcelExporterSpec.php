@@ -12,22 +12,16 @@
 namespace spec\Sylius\Bundle\ImportExportBundle\Exporter;
 
 use PhpSpec\ObjectBehavior;
-use Doctrine\ORM\EntityManager;
 
 /**
  * 
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CsvExporterSpec extends ObjectBehavior
+class ExcelExporterSpec extends ObjectBehavior
 {
-    function let(EntityManager $entityManager)
-    {
-        $this->beConstructedWith($entityManager);
-    }   
-
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ImportExportBundle\Exporter\CsvExporter');
+        $this->shouldHaveType('Sylius\Bundle\ImportExportBundle\Exporter\ExcelExporter');
     }
 
     function it_implements_exporter_interface()

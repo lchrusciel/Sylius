@@ -18,6 +18,12 @@
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:Zales0123/data-import.git"
+        }
+    ],
     "require": {
         "php":                                  ">=5.3.3",
         "a2lix/translation-form-bundle":        "~2.0",
@@ -76,7 +82,7 @@
         "winzou/state-machine":                 "~0.1",
         "winzou/state-machine-bundle":          "~0.2",
         "payum/omnipay-bridge":                 "~0.12",
-        "ddeboer/data-import":                  "@stable"
+        "ddeboer/data-import":                  "dev-datetime-to-string"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
