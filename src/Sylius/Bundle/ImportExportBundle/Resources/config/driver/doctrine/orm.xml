@@ -17,7 +17,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.form.type.export_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\ExportChoiceType</parameter>
+        <parameter key="sylius.form.type.export_profile.class">Sylius\Bundle\ImportExportBundle\Form\Type\ExportProfileType</parameter>
     </parameters>
 
 </container>

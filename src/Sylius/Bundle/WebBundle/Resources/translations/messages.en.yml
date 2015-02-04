@@ -143,6 +143,8 @@ sylius:
         content: Content
         currency:
             index: Currencies
+        export_profile:
+            index: Export Profile
         general_settings: General Settings
         generate: Generate
         group:
@@ -302,6 +304,17 @@ sylius:
         no_results: There are no currencies to display.
         exchange_rate: Exchange rate
         update_header: Editing currency
+        updated_at: Last update
+    export_profile:
+        create: Create profile
+        create_header: New export profile
+        code: Code
+        id: ID
+        name: Name
+        enabled: Enabled
+        index_header: Export Profiles
+        no_results: There are no profiles to display.
+        update_header: Editing profile
         updated_at: Last update
     filter: Filter
     form:

@@ -14,22 +14,20 @@ namespace Sylius\Component\ImportExport\Model;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ExportProfile extends Profile
+class ExportProfile extends Profile implements ExportProfileInterface
 {
     /**
      * @var string
      */
-    private $exporter;
+    private $exporter = 'csv_exporter';
 
     /**
      * @var array
      */
-    private $exporterConfiguration;
+    private $exporterConfiguration = array();
 
     /**
-     * Gets the value of exporter.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getExporter()
     {
@@ -37,11 +35,7 @@ class ExportProfile extends Profile
     }
 
     /**
-     * Sets the value of exporter.
-     *
-     * @param string $exporter the exporter
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setExporter($exporter)
     {
@@ -51,9 +45,7 @@ class ExportProfile extends Profile
     }
 
     /**
-     * Gets the value of exporterConfiguration.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getExporterConfiguration()
     {
@@ -61,11 +53,7 @@ class ExportProfile extends Profile
     }
 
     /**
-     * Sets the value of exporterConfiguration.
-     *
-     * @param array $exporterConfiguration the exporter configuration
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setExporterConfiguration(array $exporterConfiguration)
     {

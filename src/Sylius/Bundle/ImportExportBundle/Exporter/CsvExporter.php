@@ -64,4 +64,12 @@ class CsvExporter implements ExporterInterface
             }
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getType()
+    {
+        return 'csv';
+    }
 }

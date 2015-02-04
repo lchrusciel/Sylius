@@ -28,11 +28,12 @@ class RegisterExportersPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius.registry.export')) {
+        if (!$container->hasDefinition('sylius.registry.exporter')) {
             return;
         }
 
-        $registry = $container->getDefinition('sylius.registry.export');
+        $registry = $container->getDefinition('sylius.registry.exporter');
+     
         $exporter = array();
 
         foreach ($container->findTaggedServiceIds('sylius.exporter') as $id => $attributes) {
@@ -43,9 +44,8 @@ class RegisterExportersPass implements CompilerPassInterface
             $name = $attributes[0]['exporter'];
             $exporter[$name] = $attributes[0]['label'];
 
-            $registry->addMethodCall('registerExporter', array($name, new Reference($id)));
+            $registry->addMethodCall('register', array($name, new Reference($id)));
         }
-
         $container->setParameter('sylius.exporters', $exporter);
     }
 }

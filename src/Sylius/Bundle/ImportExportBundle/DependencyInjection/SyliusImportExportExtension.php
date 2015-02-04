@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ImportExportBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Import/Export extension.
@@ -35,8 +36,8 @@ class SyliusImportExportExtension extends AbstractResourceExtension
         );
         
         $container
-            ->getDefinition('sylius.form.type.export')
-            ->addArgument(new Reference('sylius.registry.export'))
+            ->getDefinition('sylius.form.type.export_profile')
+            ->addArgument(new Reference('sylius.registry.exporter'))
         ;
     }
 }

@@ -54,12 +54,10 @@ class BuildExportListener implements EventSubscriberInterface
     public function preSetData(FormEvent $event)
     {
         $exportProfiler = $event->getData();
-
         if (null === $exportProfiler) {
             return;
         }
-
-        $this->addConfigurationFields($event->getForm(), $exportProfiler->getExporter(), $exportProfiler->getExportConfiguration());
+        $this->addConfigurationFields($event->getForm(), $exportProfiler->getExporter(), $exportProfiler->getExporterConfiguration());
     }
 
     public function preBind(FormEvent $event)
@@ -75,9 +73,15 @@ class BuildExportListener implements EventSubscriberInterface
 
     protected function addConfigurationFields(FormInterface $form, $exporterType, array $configuration = array())
     {
-        $exporter = $this->exporterRegistry->getExporter($exporterType);
+        $exporter = $this->exporterRegistry->get($exporterType);
+        $formType = sprintf('sylius_%s_exporter', $exporter->getType());
         try {
-            $configurationField = $this->factory->createNamed('exporterConfiguration', $exporter->getConfigurationFormType(), $configuration, array('auto_initialize' => false));
+            $configurationField = $this->factory->createNamed(
+                'exporterConfiguration', 
+                $formType, 
+                $configuration, 
+                array('auto_initialize' => false)
+            );
         } catch (\InvalidArgumentException $e){
             return;
         }

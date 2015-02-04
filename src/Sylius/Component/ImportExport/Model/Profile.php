@@ -19,32 +19,32 @@ abstract class Profile implements ProfileInterface
     /**
      * @var integer
      */    
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var $code
      */
-    private $code;
+    protected $code;
 
     /**
      * @var string
      */
-    private $description;
+    protected $description;
 
     /**
      * @var string
      */
-    private $entity;
+    protected $entity;
 
     /**
      * @var array
      */
-    private $fields;
+    protected $fields;
 
     /**
      * Gets the value of id.

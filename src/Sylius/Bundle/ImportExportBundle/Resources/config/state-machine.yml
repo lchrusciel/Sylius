@@ -41,10 +41,10 @@ winzou_state_machine:
                     do:   [@sm.callback.cascade_transition, 'apply']
                     args: ['object.getItems()', 'event', 'null', '"sylius_exporter"']
 
-    sylius_exporter:
-        class:         %sylius.model.exporter.class%
-        property_path: exportState
-        graph:         sylius_exporter
+    sylius_export_job:
+        class:         %sylius.model.export_job.class%
+        property_path: state
+        graph:         export_job
         state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
         states:
             checkout: ~

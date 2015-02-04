@@ -14,17 +14,15 @@ namespace Sylius\Component\ImportExport\Model;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ExportJob extends Job
+class ExportJob extends Job implements ExportJobInterface
 {
     /**
-     * @var ExportProfile
+     * @var ProfileInterface
      */
     private $exportProfile;
 
     /**
-     * Gets the value of exportProfile.
-     *
-     * @return ExportProfile
+     * {@inheritdoc}
      */
     public function getExportProfile()
     {
@@ -32,13 +30,9 @@ class ExportJob extends Job
     }
 
     /**
-     * Sets the value of exportProfile.
-     *
-     * @param ExportProfile $exportProfile the export profile
-     *
-     * @return self
+     * {@inheritdoc}
      */
-    private function setExportProfile(ExportProfile $exportProfile)
+    public function setExportProfile(ExportProfile $exportProfile)
     {
         $this->exportProfile = $exportProfile;
 

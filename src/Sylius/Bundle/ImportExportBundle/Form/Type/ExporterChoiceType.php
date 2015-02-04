@@ -22,8 +22,18 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ExporterChoiceType extends AbstractType
 {
+    /**
+     * Exporters
+     *
+     * @var array
+     */
     protected $exporters;
 
+    /** 
+     * Constructor
+     * 
+     * @param array $exporters
+     */
     public function __construct(array $exporters)
     {
         $this->exporters = $exporters;

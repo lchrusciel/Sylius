@@ -40,7 +40,25 @@ class ExportProfileType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new BuildExportListener($this->exporterRegistry, $builder->getFormFactory()))
-            ->add('type', 'sylius_exporter_choice', array(
+            ->add('name', 'text', array(
+                'label' => 'sylius.form.export_profile.name',
+                'required' => true,
+            ))
+            ->add('code', 'text', array(
+                'label'    => 'sylius.form.export_profile.code',
+                'required' => true,
+            ))
+            ->add('description', 'textarea', array(
+                'label'    => 'sylius.form.export_profile.description',
+                'required' => false,
+            ))
+            ->add('entity', 'choice', array(
+                'label' => 'sylius.form.export_profile.entity',
+            ))
+            ->add('fields', 'checkbox', array(
+                'label' => 'sylius.form.export_profile.name',
+            ))
+            ->add('exporter', 'sylius_exporter_choice', array(
                 'label' => 'sylius.form.rule.exporter'
             ))
         ;

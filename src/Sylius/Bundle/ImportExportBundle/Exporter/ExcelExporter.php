@@ -40,8 +40,11 @@ class ExcelExporter implements ExporterInterface
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
-        return 'excel_exporter';
+        return 'excel';
     }
 }

@@ -22,8 +22,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * It is fully decoupled, so you can integrate it into your existing project.
  *
- * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
 class SyliusImportExportBundle extends AbstractResourceBundle
 {
@@ -53,9 +53,8 @@ class SyliusImportExportBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\ImportExport\Model\ProfileInterface'  => 'sylius.model.import_export.profile.class',
-            'Sylius\Component\ImportExport\Model\ExporterInterface' => 'sylius.model.import_export.exporter.class',
-            'Sylius\Component\ImportExport\Model\JobInterface'      => 'sylius.model.import_export.job.class'
+            'Sylius\Component\ImportExport\Model\ExportProfileInterface' => 'sylius.model.export_profile.class',
+            'Sylius\Component\ImportExport\Model\ExportJobInterface'     => 'sylius.model.export_job.class',
         );
     }
 
