@@ -12,17 +12,17 @@
 namespace spec\Sylius\Component\ImportExport\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\ImportExport\Model\ExportProfile;
+use Sylius\Component\ImportExport\Model\ImportProfile;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ExportJobSpec extends ObjectBehavior
+class ImportJobSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\ImportExport\Model\ExportJob');
+        $this->shouldHaveType('Sylius\Component\ImportExport\Model\ImportJob');
     }
 
     public function it_is_job_object()
@@ -30,9 +30,9 @@ class ExportJobSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\ImportExport\Model\Job');
     }
 
-    public function it_implements_export_job_interface()
+    public function it_implements_import_job_interface()
     {
-        $this->shouldImplement('Sylius\Component\ImportExport\Model\ExportJobInterface');
+        $this->shouldImplement('Sylius\Component\ImportExport\Model\ImportJobInterface');
     }
 
     public function it_has_status()
@@ -69,9 +69,9 @@ class ExportJobSpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn($updatedAt);
     }
 
-    public function it_has_export_profile(ExportProfile $exportProfile)
+    public function it_has_import_profile(ImportProfile $importProfile)
     {
-        $this->setExportProfile($exportProfile);
-        $this->getExportProfile()->shouldReturn($exportProfile);
+        $this->setImportProfile($importProfile);
+        $this->getImportProfile()->shouldReturn($importProfile);
     }
 }

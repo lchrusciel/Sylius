@@ -12,25 +12,24 @@
 namespace Sylius\Component\ImportExport\Model;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface ExportJobInterface extends JobInterface
+interface ImportJobInterface extends JobInterface
 {
     
     /**
-     * Gets the value of exportProfile.
+     * Gets the value of importProfile.
      *
-     * @return ExportProfile
+     * @return importProfile
      */
-    public function getExportProfile();
+    public function getImportProfile();
 
     /**
-     * Sets the value of exportProfile.
+     * Sets the value of importProfile.
      *
-     * @param ExportProfile $exportProfile the export profile
+     * @param ImportProfile $importProfile the import profile
      *
      * @return self
      */
-    public function setExportProfile(ExportProfile $exportProfile);
+    public function setImportProfile(ImportProfile $importProfile);
 }
