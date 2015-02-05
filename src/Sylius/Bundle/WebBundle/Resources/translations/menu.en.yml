@@ -11,11 +11,13 @@ sylius:
                 countries: Countries
                 customer: Customers
                 content: Content
-                dashboard: Dashboard
                 currencies: Currencies
+                dashboard: Dashboard
+                export: Export
                 general_settings: General settings
                 groups: Groups
                 homepage: Your store
+                import_export: Import/Export
                 locales: Locales
                 new_order: Add new order
                 new_promotion: Add new promotion
@@ -47,11 +49,13 @@ sylius:
                 content: Content
                 countries: Countries
                 customer: Customers
-                dashboard: Dashboard
                 currencies: Currencies
+                dashboard: Dashboard
+                export: Export
                 general_settings: General settings
                 groups: Groups
                 homepage: Back to frontend
+                import_export: Import/Export
                 locales: Locales
                 new_order: Add new order
                 new_promotion: Add new promotion

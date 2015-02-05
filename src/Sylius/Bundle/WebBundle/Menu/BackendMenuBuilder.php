@@ -49,6 +49,7 @@ class BackendMenuBuilder extends MenuBuilder
         $this->addSalesMenu($menu, $childOptions, 'main');
         $this->addCustomersMenu($menu, $childOptions, 'main');
         $this->addContentMenu($menu, $childOptions, 'main');
+        $this->addImportExportMenu($menu, $childOptions, 'main');
         $this->addConfigurationMenu($menu, $childOptions, 'main');
 
         $menu->addChild('homepage', array(
@@ -88,6 +89,7 @@ class BackendMenuBuilder extends MenuBuilder
         $this->addSalesMenu($menu, $childOptions, 'sidebar');
         $this->addCustomersMenu($menu, $childOptions, 'sidebar');
         $this->addContentMenu($menu, $childOptions, 'sidebar');
+        $this->addImportExportMenu($menu, $childOptions, 'sidebar');
         $this->addConfigurationMenu($menu, $childOptions, 'sidebar');
 
         $this->eventDispatcher->dispatch(MenuBuilderEvent::BACKEND_SIDEBAR, new MenuBuilderEvent($this->factory, $menu));
@@ -240,6 +242,26 @@ class BackendMenuBuilder extends MenuBuilder
             'route' => 'sylius_backend_promotion_create',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-plus-sign'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.new_promotion', $section)));
+    }
+    
+    /**
+     * Add import/export menu.
+     *
+     * @param ItemInterface $menu
+     * @param array         $childOptions
+     * @param string        $section
+     */
+    protected function addImportExportMenu(ItemInterface $menu, array $childOptions, $section)
+    {
+        $child = $menu
+            ->addChild('import_export', $childOptions)
+            ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.import_export', $section)))
+        ;
+
+        $child->addChild('export', array(
+            'route' => 'sylius_backend_export_profile_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-shopping-cart'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.export', $section)));
     }
 
     /**
