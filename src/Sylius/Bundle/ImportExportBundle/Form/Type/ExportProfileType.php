@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ImportExportBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildExportListener;
+use Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildWriterFormListener;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 

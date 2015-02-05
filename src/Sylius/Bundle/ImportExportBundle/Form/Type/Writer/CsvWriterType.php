@@ -28,7 +28,7 @@ class CsvWriterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', 'text', array(
+            ->add('delimiter', 'text', array(
                 'label'    => 'sylius.form.writer.csv.delimiter',
                 'data'     => ';',
             ))
@@ -45,5 +45,13 @@ class CsvWriterType extends AbstractType
                 'required' => true,
             ))
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'sylius_csv_writer';
     }
 }

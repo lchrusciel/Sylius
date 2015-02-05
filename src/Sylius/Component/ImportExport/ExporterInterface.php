@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\ImportExport;
 
-use Sylius\Component\ImportExport\Model\ExportProfile;
+use Sylius\Component\ImportExport\Model\ExportProfileInterface;
 
 /**
  * @author Mateusz Zalewski <zaleslaw@.gmail.com>
