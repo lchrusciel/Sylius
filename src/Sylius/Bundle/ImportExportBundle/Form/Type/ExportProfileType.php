@@ -39,7 +39,7 @@ class ExportProfileType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new BuildExportListener($this->exporterRegistry, $builder->getFormFactory()))
+            ->addEventSubscriber(new BuildWriterFormListener($this->exporterRegistry, $builder->getFormFactory()))
             ->add('name', 'text', array(
                 'label' => 'sylius.form.export_profile.name',
                 'required' => true,

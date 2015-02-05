@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\ImportExportBundle\Form\EventListener;
 
+use Sylius\Component\ImportExport\Model\ExportProfileInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -25,7 +27,7 @@ use Symfony\Component\Form\FormInterface;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
-class BuildExportListener implements EventSubscriberInterface
+class BuildWriterFormListener implements EventSubscriberInterface
 {
     /**
      * @var ServiceRegistryInterface
@@ -54,9 +56,15 @@ class BuildExportListener implements EventSubscriberInterface
     public function preSetData(FormEvent $event)
     {
         $exportProfiler = $event->getData();
+
         if (null === $exportProfiler) {
             return;
         }
+
+        if (!$exportProfiler instanceof ExportProfileInterface) {
+            throw new UnexpectedTypeException($exportProfiler, 'Sylius\Component\ImportExport\Model\ExportProfileInterface');
+        }
+
         $this->addConfigurationFields($event->getForm(), $exportProfiler->getWriter(), $exportProfiler->getWriterConfiguration());
     }
 
@@ -77,7 +85,7 @@ class BuildExportListener implements EventSubscriberInterface
         $formType = sprintf('sylius_%s_writer', $exporter->getType());
         try {
             $configurationField = $this->factory->createNamed(
-                'exporterConfiguration', 
+                'writerConfiguration', 
                 $formType, 
                 $configuration, 
                 array('auto_initialize' => false)
