@@ -19,7 +19,7 @@ use Sylius\Bundle\ImportExportBundle\Exporter\CsvExporter;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DelegatingExporterSpec extends ObjectBehavior
+class ExporterSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $registry)
     {

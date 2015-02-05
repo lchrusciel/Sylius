@@ -16,7 +16,7 @@ use Sylius\Component\ImportExport\Model\ExportProfile;
 /**
  * @author Mateusz Zalewski <zaleslaw@.gmail.com>
  */
-interface DelegatingExporterInterface
+interface ExporterInterface
 {
     /**
      *

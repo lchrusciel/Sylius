@@ -17,7 +17,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DelegatingExporter implements DelegatingExporterInterface
+class Exporter implements DelegatingExporterInterface
 {
     /**
      * Exporter registry
