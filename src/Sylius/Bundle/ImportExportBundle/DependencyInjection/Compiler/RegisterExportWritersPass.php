@@ -28,11 +28,11 @@ class RegisterExportWritersPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius.registry.exporter')) {
+        if (!$container->hasDefinition('sylius.registry.export.writer')) {
             return;
         }
 
-        $registry = $container->getDefinition('sylius.registry.exporter');
+        $registry = $container->getDefinition('sylius.registry.export.writer');
      
         $writer = array();
 
