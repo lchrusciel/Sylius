@@ -27,12 +27,15 @@
     </parameters>
 
     <services>
-        <service id="sylius.registry.exporter" class="%sylius.registry.export.class%">
+        <service id="sylius.registry.export.reader" class="%sylius.registry.export.class%">
+            <argument>Sylius\Component\ImportExport\Reader\ReaderInterface</argument>
+        </service>
+        <service id="sylius.registry.export.writer" class="%sylius.registry.export.class%">
             <argument>Sylius\Component\ImportExport\Writer\WriterInterface</argument>
         </service>
-        
         <service id="sylius.import_export.exporter" class="%sylius.import_export.exporter.class%">
-            <argument type="service" id="sylius.registry.exporter" />
+            <argument type="service" id="sylius.registry.export.reader" />
+            <argument type="service" id="sylius.registry.export.writer" />
         </service>
         
         <service id="sylius.form.type.writer_choice" class="%sylius.form.type.writer_choice.class%">

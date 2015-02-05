@@ -37,7 +37,7 @@ class ExportDataCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $exportProfile = $this->getContainer()->get('sylius.repository.export_profile')->find(array('code' => $input->getArgument('code')));
+        $exportProfile = $this->getContainer()->get('sylius.repository.export_profile')->findByCode($input->getArgument('code'));
         if ($exportProfile === null) {
             throw new \InvalidArgumentException('There is no export profile with given code.');
         }
