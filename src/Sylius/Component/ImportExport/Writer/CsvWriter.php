@@ -36,6 +36,9 @@ class CsvWriter implements WriterInterface
      */
     private $configuration;
 
+    /**
+     * @param array $items
+     */
     public function write(array $items)
     {
         if (!$this->running) {

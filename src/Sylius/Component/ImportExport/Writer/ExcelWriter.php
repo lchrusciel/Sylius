@@ -39,7 +39,7 @@ class ExcelWriter implements WriterInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getType()
     {
         return 'excel';
     }

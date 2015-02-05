@@ -28,4 +28,9 @@ class ExcelWriterSpec extends ObjectBehavior
     {
         $this->shouldImplement('Sylius\Component\ImportExport\Writer\WriterInterface');
     }
+
+    function it_has_type()
+    {
+        $this->getType()->shouldReturn('excel');
+    }
 }
