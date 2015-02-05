@@ -18,34 +18,34 @@ interface ExportProfileInterface extends ProfileInterface
 {
 
     /**
-     * Gets the value of exporter.
+     * Gets the value of writer.
      *
      * @return string
      */
-    public function getExporter();
+    public function getWriter();
 
     /**
-     * Sets the value of exporter.
+     * Sets the value of writer.
      *
-     * @param string $exporter the exporter
+     * @param string $writer the writer
      *
      * @return self
      */
-    public function setExporter($exporter);
+    public function setWriter($writer);
 
     /**
-     * Gets the value of exporterConfiguration.
+     * Gets the value of writerConfiguration.
      *
      * @return array
      */
-    public function getExporterConfiguration();
+    public function getWriterConfiguration();
 
     /**
-     * Sets the value of exporterConfiguration.
+     * Sets the value of writerConfiguration.
      *
-     * @param array $exporterConfiguration the exporter configuration
+     * @param array $writerConfiguration the exporter configuration
      *
      * @return self
      */
-    public function setExporterConfiguration(array $exporterConfiguration);
+    public function setWriterConfiguration(array $writerConfiguration);
 }

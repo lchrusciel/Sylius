@@ -19,27 +19,27 @@ class ExportProfile extends Profile implements ExportProfileInterface
     /**
      * @var string
      */
-    private $exporter = 'csv_exporter';
+    private $writer = 'csv_writer';
 
     /**
      * @var array
      */
-    private $exporterConfiguration = array();
+    private $writerConfiguration = array();
 
     /**
      * {@inheritdoc}
      */
-    public function getExporter()
+    public function getWriter()
     {
-        return $this->exporter;
+        return $this->writer;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setExporter($exporter)
+    public function setWriter($writer)
     {
-        $this->exporter = $exporter;
+        $this->writer = $writer;
 
         return $this;
     }
@@ -47,17 +47,17 @@ class ExportProfile extends Profile implements ExportProfileInterface
     /**
      * {@inheritdoc}
      */
-    public function getExporterConfiguration()
+    public function getWriterConfiguration()
     {
-        return $this->exporterConfiguration;
+        return $this->writerConfiguration;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setExporterConfiguration(array $exporterConfiguration)
+    public function setWriterConfiguration(array $writerConfiguration)
     {
-        $this->exporterConfiguration = $exporterConfiguration;
+        $this->writerConfiguration = $writerConfiguration;
 
         return $this;
     }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\ImportExport\Exporter;
+namespace Sylius\Component\ImportExport\Writer;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

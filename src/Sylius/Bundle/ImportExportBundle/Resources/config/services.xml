@@ -19,34 +19,32 @@
     <parameters>
         <parameter key="sylius.registry.export.class">Sylius\Component\Registry\ServiceRegistry</parameter>
         
-        <parameter key="sylius.import_export.exporter.class">Sylius\Component\ImportExport\Exporter\DelegatingExporter</parameter>
-        <parameter key="sylius.form.type.exporter_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Exporter\ExporterChoiceType</parameter>
-        
-        <parameter key="sylius.import_export.csv_exporter.class">Sylius\Bundle\ImportExportBundle\Exporter\CsvExporter</parameter>
-        <parameter key="sylius.import_export.excel_exporter.class">Sylius\Bundle\ImportExportBundle\Exporter\ExcelExporter</parameter>
+        <parameter key="sylius.import_export.exporter.class">Sylius\Component\ImportExport\Exporter</parameter>
+        <parameter key="sylius.form.type.writer_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Writer\WriterChoiceType</parameter>
+
+        <parameter key="sylius.export.csv_writer.class">Sylius\Component\ImportExport\Writer\CsvWriter</parameter>
+        <parameter key="sylius.export.excel_writer.class">Sylius\Component\ImportExport\Writer\ExcelWriter</parameter>
     </parameters>
 
     <services>
         <service id="sylius.registry.exporter" class="%sylius.registry.export.class%">
-            <argument>Sylius\Component\ImportExport\Exporter\ExporterInterface</argument>
+            <argument>Sylius\Component\ImportExport\Writer\WriterInterface</argument>
         </service>
         
         <service id="sylius.import_export.exporter" class="%sylius.import_export.exporter.class%">
             <argument type="service" id="sylius.registry.exporter" />
         </service>
         
-        <service id="sylius.form.type.exporter_choice" class="%sylius.form.type.exporter_choice.class%">
-            <argument>%sylius.exporters%</argument>
-            <tag name="form.type" alias="sylius_exporter_choice" />
+        <service id="sylius.form.type.writer_choice" class="%sylius.form.type.writer_choice.class%">
+            <argument>%sylius.writers%</argument>
+            <tag name="form.type" alias="sylius_writer_choice" />
         </service>
 
-        <service id="sylius.import_export.csv_exporter" class="%sylius.import_export.csv_exporter.class%">
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <tag name="sylius.exporter" exporter="csv_exporter" label="CSV exporter" />
+        <service id="sylius.export.csv_writer" class="%sylius.export.csv_writer.class%">
+            <tag name="sylius.export.writer" writer="csv_writer" label="CSV writer" />
         </service>
-        <service id="sylius.import_export.excel_exporter" class="%sylius.import_export.excel_exporter.class%">
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <tag name="sylius.exporter" exporter="excel_exporter" label="Excel exporter" />
+        <service id="sylius.export.excel_writer" class="%sylius.export.excel_writer.class%">
+            <tag name="sylius.export.writer" writer="excel_writer" label="Excel writer" />
         </service>
     </services>
 

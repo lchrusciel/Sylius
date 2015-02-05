@@ -23,8 +23,8 @@
         <field name="description" column="description" type="text" />
         <field name="code" column="code" type="string" nullable="false" unique="true" />
 
-        <field name="exporter" column="exporter" type="string" nullable="false" />
-        <field name="exporterConfiguration" column="exporter_configuration" type="array" />
+        <field name="writer" column="writer" type="string" nullable="false" />
+        <field name="writerConfiguration" column="writer_configuration" type="array" />
     </mapped-superclass>
     
 </doctrine-mapping>

@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ImportExportBundle\Form\Type\Exporter;
+namespace Sylius\Bundle\ImportExportBundle\Form\Type\Writer;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Exporter choice choice type.
+ * Writer choice choice type.
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CsvExporterType extends AbstractType
+class CsvWriterType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -29,19 +29,19 @@ class CsvExporterType extends AbstractType
     {
         $builder
             ->add('type', 'text', array(
-                'label'    => 'sylius.form.exporter.csv.delimiter',
+                'label'    => 'sylius.form.writer.csv.delimiter',
                 'data'     => ';',
             ))
             ->add('enclosure', 'text', array(
-                'label'    => 'sylius.form.exporter.csv.enclosure',
+                'label'    => 'sylius.form.writer.csv.enclosure',
                 'data'     => '"',
             ))
             ->add('add_header', 'checkbox', array(
-                'label'    => 'sylius.form.exporter.csv.add_header',
+                'label'    => 'sylius.form.writer.csv.add_header',
                 'required' => false,
             ))
             ->add('file', 'text', array(
-                'label'    => 'sylius.form.exporter.file',
+                'label'    => 'sylius.form.writer.file',
                 'required' => true,
             ))
         ;

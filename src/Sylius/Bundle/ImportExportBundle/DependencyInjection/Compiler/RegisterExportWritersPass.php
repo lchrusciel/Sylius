@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\Reference;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
-class RegisterExportersPass implements CompilerPassInterface
+class RegisterExportWritersPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
@@ -34,18 +34,18 @@ class RegisterExportersPass implements CompilerPassInterface
 
         $registry = $container->getDefinition('sylius.registry.exporter');
      
-        $exporter = array();
+        $writer = array();
 
-        foreach ($container->findTaggedServiceIds('sylius.exporter') as $id => $attributes) {
-            if (!isset($attributes[0]['exporter']) || !isset($attributes[0]['label'])) {
-                throw new \InvalidArgumentException('Tagged exporters needs to have `exporter` and `label` attributes.');
+        foreach ($container->findTaggedServiceIds('sylius.export.writer') as $id => $attributes) {
+            if (!isset($attributes[0]['writer']) || !isset($attributes[0]['label'])) {
+                throw new \InvalidArgumentException('Tagged writers needs to have `writer` and `label` attributes.');
             }
 
-            $name = $attributes[0]['exporter'];
-            $exporter[$name] = $attributes[0]['label'];
+            $name = $attributes[0]['writer'];
+            $writer[$name] = $attributes[0]['label'];
 
             $registry->addMethodCall('register', array($name, new Reference($id)));
         }
-        $container->setParameter('sylius.exporters', $exporter);
+        $container->setParameter('sylius.writers', $writer);
     }
 }

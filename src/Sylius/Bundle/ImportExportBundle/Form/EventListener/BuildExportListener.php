@@ -30,16 +30,16 @@ class BuildExportListener implements EventSubscriberInterface
     /**
      * @var ServiceRegistryInterface
      */
-    private $exporterRegistry;
+    private $writerRegistry;
 
     /**
      * @var FormFactoryInterface
      */
     private $factory;
 
-    public function __construct(ServiceRegistryInterface $exporterRegistry, FormFactoryInterface $factory)
+    public function __construct(ServiceRegistryInterface $writerRegistry, FormFactoryInterface $factory)
     {
-        $this->exporterRegistry = $exporterRegistry;
+        $this->writerRegistry = $writerRegistry;
         $this->factory = $factory;
     }
 
@@ -57,24 +57,24 @@ class BuildExportListener implements EventSubscriberInterface
         if (null === $exportProfiler) {
             return;
         }
-        $this->addConfigurationFields($event->getForm(), $exportProfiler->getExporter(), $exportProfiler->getExporterConfiguration());
+        $this->addConfigurationFields($event->getForm(), $exportProfiler->getWriter(), $exportProfiler->getWriterConfiguration());
     }
 
     public function preBind(FormEvent $event)
     {
         $data = $event->getData();
 
-        if (empty($data) || !array_key_exists('exporter', $data)) {
+        if (empty($data) || !array_key_exists('writer', $data)) {
             return;
         }
 
-        $this->addConfigurationFields($event->getForm(), $data['exporter']);
+        $this->addConfigurationFields($event->getForm(), $data['writer']);
     }
 
     protected function addConfigurationFields(FormInterface $form, $exporterType, array $configuration = array())
     {
-        $exporter = $this->exporterRegistry->get($exporterType);
-        $formType = sprintf('sylius_%s_exporter', $exporter->getType());
+        $exporter = $this->writerRegistry->get($exporterType);
+        $formType = sprintf('sylius_%s_writer', $exporter->getType());
         try {
             $configurationField = $this->factory->createNamed(
                 'exporterConfiguration', 

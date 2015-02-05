@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ImportExportBundle\ExportWriter;
+namespace Sylius\Component\ImportExport\Writer;
 
 use Doctrine\ORM\EntityManager;
-use Sylius\Component\ImportExport\Exporter\WriterInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ExcelExporter implements WriterInterface
+class ExcelWriter implements WriterInterface
 {
     public function write(array $items, array $configuration)
     {

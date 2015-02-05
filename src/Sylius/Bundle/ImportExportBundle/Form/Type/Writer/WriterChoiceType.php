@@ -9,41 +9,41 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ImportExportBundle\Form\Type\Exporter;
+namespace Sylius\Bundle\ImportExportBundle\Form\Type\Writer;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Exporter choice choice type.
+ * Writer choice choice type.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
-class ExporterChoiceType extends AbstractType
+class WriterChoiceType extends AbstractType
 {
     /**
-     * Exporters
+     * Writers
      *
      * @var array
      */
-    protected $exporters;
+    protected $writers;
 
     /** 
      * Constructor
      * 
-     * @param array $exporters
+     * @param array $writers
      */
-    public function __construct(array $exporters)
+    public function __construct(array $writers)
     {
-        $this->exporters = $exporters;
+        $this->writers = $writers;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
-                'choices' => $this->exporters
+                'choices' => $this->writers
             ))
         ;
     }
@@ -55,6 +55,6 @@ class ExporterChoiceType extends AbstractType
 
     public function getName()
     {
-        return 'sylius_exporter_choice';
+        return 'sylius_writer_choice';
     }
 }

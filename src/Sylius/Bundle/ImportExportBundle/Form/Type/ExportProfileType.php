@@ -52,13 +52,7 @@ class ExportProfileType extends AbstractResourceType
                 'label'    => 'sylius.form.export_profile.description',
                 'required' => false,
             ))
-            ->add('entity', 'choice', array(
-                'label' => 'sylius.form.export_profile.entity',
-            ))
-            ->add('fields', 'checkbox', array(
-                'label' => 'sylius.form.export_profile.name',
-            ))
-            ->add('exporter', 'sylius_exporter_choice', array(
+            ->add('writer', 'sylius_writer_choice', array(
                 'label' => 'sylius.form.rule.exporter'
             ))
         ;

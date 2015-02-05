@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ImportExportBundle\Exporter;
+namespace spec\Sylius\Component\ImportExport\Writer;
 
 use PhpSpec\ObjectBehavior;
 
@@ -17,15 +17,15 @@ use PhpSpec\ObjectBehavior;
  * 
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ExcelExporterSpec extends ObjectBehavior
+class ExcelWriterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ImportExportBundle\Exporter\ExcelExporter');
+        $this->shouldHaveType('Sylius\Component\ImportExport\Writer\ExcelWriter');
     }
 
     function it_implements_exporter_interface()
     {
-        $this->shouldImplement('Sylius\Component\ImportExport\Exporter\ExporterInterface');
+        $this->shouldImplement('Sylius\Component\ImportExport\Writer\WriterInterface');
     }
 }

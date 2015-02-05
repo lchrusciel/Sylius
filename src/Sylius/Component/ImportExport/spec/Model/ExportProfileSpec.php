@@ -28,17 +28,17 @@ class ExportProfileSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\ImportExport\Model\Profile');
     }
 
-    public function it_has_exporter()
+    public function it_has_writer()
     {
-        $this->setExporter('testExporter');
-        $this->getExporter()->shouldReturn('testExporter');
+        $this->setWriter('testWriter');
+        $this->getWriter()->shouldReturn('testWriter');
     }
 
-    public function it_has_exporter_configuration()
+    public function it_has_writer_configuration()
     {
-        $exporterConfiguration = array('config1' => 'First field of configuration', 'config2' => 'Second field of configuration');
-        $this->setExporterConfiguration($exporterConfiguration);
-        $this->getExporterConfiguration()->shouldReturn($exporterConfiguration);
+        $writerConfiguration = array('config1' => 'First field of configuration', 'config2' => 'Second field of configuration');
+        $this->setWriterConfiguration($writerConfiguration);
+        $this->getWriterConfiguration()->shouldReturn($writerConfiguration);
     }
 
     public function it_has_name()
