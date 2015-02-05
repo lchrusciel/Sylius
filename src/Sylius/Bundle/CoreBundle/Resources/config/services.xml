@@ -79,6 +79,9 @@
         <parameter key="sylius.dynamic_router.class">Symfony\Cmf\Component\Routing\DynamicRouter</parameter>
         <parameter key="sylius.generator.class">Sylius\Bundle\CoreBundle\Routing\SyliusAwareGenerator</parameter>
         <parameter key="sylius.route_provider.class">Sylius\Bundle\CoreBundle\Routing\RouteProvider</parameter>
+        
+        <parameter key="sylius.export.user_reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\UserReader</parameter>
+        <parameter key="sylius.export.product_reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\ProductReader</parameter>
 
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\CoreBundle\StateMachineCallback\CompleteOrderCallback</parameter>
     </parameters>
@@ -443,6 +446,14 @@
             <argument>_sylius_entity</argument>
             <argument>_sylius</argument>
             <argument>%sylius.sylius_by_classes%</argument>
+        </service>
+        
+        <!-- Export reader -->
+        <service id="sylius.export.user_reader" class="%sylius.export.user_reader.class%">
+            <argument type="service" id="sylius.repository.user" />
+        </service>
+        <service id="sylius.export.product_reader" class="%sylius.export.product_reader.class%">
+            <argument type="service" id="sylius.repository.product" />
         </service>
     </services>
 
