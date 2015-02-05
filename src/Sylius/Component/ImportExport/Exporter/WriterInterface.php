@@ -14,7 +14,7 @@ namespace Sylius\Component\ImportExport\Exporter;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface ExporterInterface
+interface WriterInterface
 {
-    public function export($entity, array $fields, array $configuration);
+    public function write(array $items, array $configuration);
 }
