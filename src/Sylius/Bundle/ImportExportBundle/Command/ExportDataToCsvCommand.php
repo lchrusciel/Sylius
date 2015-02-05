@@ -38,7 +38,9 @@ class ExportDataToCsvCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $csvWriter = new CsvWriter();
-        $csvWriter->write(array('item1' => 'Item1', 'item2' => 'Item2'), array('file' => $input->getArgument('file')));
+        $csvWriter->setConfiguration(array('file' => $input->getArgument('file'), 'delimiter' => '|', 'enclosure' => '*'));
+        $csvWriter->write(array('item1', 'item2, item3, item4'));
+        $csvWriter->write(array('item1.1, item2.1, item3.1'));
 
         $output->writeln(sprintf('File %s has been created.', $input->getArgument('file')));
     }

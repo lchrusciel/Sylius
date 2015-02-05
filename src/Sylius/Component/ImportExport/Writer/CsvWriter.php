@@ -31,13 +31,29 @@ class CsvWriter implements WriterInterface
      */
     private $csvWriter;
 
-    public function write(array $items, array $configuration)
+    /**
+     * @var array
+     */
+    private $configuration;
+
+    public function write(array $items)
     {
         if (!$this->running) {
-            $this->csvWriter = new Writer($configuration["file"], 'w');
+            $this->csvWriter = new Writer($this->configuration['file'], 'w');
+            $this->csvWriter->setDelimiter($this->configuration['delimiter']);
+            $this->csvWriter->setEnclosure($this->configuration['enclosure']);
+            $this->running = true;
         }
 
-        $this->csvWriter->writeFromArray($items);
+        $this->csvWriter->writeRow($items);
+    }
+
+    /**
+     * @param array $configuration
+     */
+    public function setConfiguration(array $configuration)
+    {
+        $this->configuration = $configuration;
     }
 
     /**
