@@ -13,6 +13,7 @@ namespace Sylius\Component\ImportExport\Model;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 interface JobInterface
 {

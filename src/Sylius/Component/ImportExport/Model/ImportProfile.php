@@ -12,9 +12,15 @@
 namespace Sylius\Component\ImportExport\Model;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface ExportProfileInterface extends ProfileInterface
+class ImportProfile extends Profile implements ExportProfileInterface
 {
+    function __construct() 
+    {
+        $this->writer = '';
+        $this->writerConfiguration = array();
+        $this->reader = '';
+        $this->readerConfiguration = array();
+    }
 }

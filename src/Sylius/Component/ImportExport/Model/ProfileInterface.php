@@ -13,6 +13,7 @@ namespace Sylius\Component\ImportExport\Model;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 interface ProfileInterface
 {
@@ -23,8 +24,12 @@ interface ProfileInterface
     public function setCode($code);
     public function getDescription();
     public function setDescription($description);
-    public function getEntity();
-    public function setEntity($entity);
-    public function getFields();
-    public function setFields(array $fields);
+    public function getWriter();
+    public function setWriter($writer);
+    public function getWriterConfiguration();
+    public function setWriterConfiguration(array $writerConfiguration);
+    public function getReader();
+    public function setReader($reader);
+    public function getReaderConfiguration();
+    public function setReaderConfiguration(array $readerConfiguration);
 }

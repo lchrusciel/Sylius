@@ -17,11 +17,11 @@ use PhpSpec\ObjectBehavior;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ExportProfileSpec extends ObjectBehavior
+class ImportProfileSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\ImportExport\Model\ExportProfile');
+        $this->shouldHaveType('Sylius\Component\ImportExport\Model\ImportProfile');
     }
 
     public function it_is_profile_object()
@@ -44,8 +44,8 @@ class ExportProfileSpec extends ObjectBehavior
 
     public function it_has_name()
     {
-        $this->setName("testExportProfile");
-        $this->getName()->shouldReturn('testExportProfile');
+        $this->setName("testImportProfile");
+        $this->getName()->shouldReturn('testImportProfile');
     }
 
     public function it_has_code()

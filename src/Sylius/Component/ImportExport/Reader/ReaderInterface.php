@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\ImportExport\Model;
+namespace Sylius\Component\ImportExport\Reader;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface ExportProfileInterface extends ProfileInterface
+interface ReaderInterface
 {
+    public function read(array $items, array $configuration);
 }

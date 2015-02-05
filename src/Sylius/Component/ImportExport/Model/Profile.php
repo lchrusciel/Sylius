@@ -13,6 +13,7 @@ namespace Sylius\Component\ImportExport\Model;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 abstract class Profile implements ProfileInterface
 {
@@ -27,7 +28,7 @@ abstract class Profile implements ProfileInterface
     protected $name;
 
     /**
-     * @var $code
+     * @var string
      */
     protected $code;
 
@@ -39,12 +40,22 @@ abstract class Profile implements ProfileInterface
     /**
      * @var string
      */
-    protected $entity;
+    protected $writer;
 
     /**
      * @var array
      */
-    protected $fields;
+    protected $writerConfiguration;
+    
+    /**
+     * @var string
+     */
+    protected $reader;
+
+    /**
+     * @var array
+     */
+    protected $readerConfiguration;
 
     /**
      * Gets the value of id.
@@ -129,49 +140,73 @@ abstract class Profile implements ProfileInterface
     }
 
     /**
-     * Gets the value of entity.
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    public function getEntity()
+    public function getWriter()
     {
-        return $this->entity;
+        return $this->writer;
     }
 
     /**
-     * Sets the value of entity.
-     *
-     * @param string $entity the entity
-     *
-     * @return self
+     * {@inheritdoc}
      */
-    public function setEntity($entity)
+    public function setWriter($writer)
     {
-        $this->entity = $entity;
+        $this->writer = $writer;
 
         return $this;
     }
 
     /**
-     * Gets the value of fields.
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function getFields()
+    public function getWriterConfiguration()
     {
-        return $this->fields;
+        return $this->writerConfiguration;
     }
 
     /**
-     * Sets the value of fields.
-     *
-     * @param array $fields the fields
-     *
-     * @return self
+     * {@inheritdoc}
      */
-    public function setFields(array $fields)
+    public function setWriterConfiguration(array $writerConfiguration)
     {
-        $this->fields = $fields;
+        $this->writerConfiguration = $writerConfiguration;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getReader()
+    {
+        return $this->reader;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setReader($reader)
+    {
+        $this->reader = $reader;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getReaderConfiguration()
+    {
+        return $this->readerConfiguration;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setReaderConfiguration(array $readerConfiguration)
+    {
+        $this->readerConfiguration = $readerConfiguration;
 
         return $this;
     }
