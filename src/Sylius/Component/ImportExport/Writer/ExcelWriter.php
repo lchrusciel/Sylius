@@ -18,9 +18,22 @@ use Doctrine\ORM\EntityManager;
  */
 class ExcelWriter implements WriterInterface
 {
-    public function write(array $items, array $configuration)
+    /**
+     * @var array
+     */
+    private $configuration;
+
+    public function write(array $items)
     {
         
+    }
+
+    /**
+     * @param array $configuration
+     */
+    public function setConfiguration(array $configuration)
+    {
+        $this->configuration = $configuration;
     }
 
     /**
