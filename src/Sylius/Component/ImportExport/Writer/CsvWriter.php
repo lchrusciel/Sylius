@@ -12,15 +12,48 @@
 namespace Sylius\Component\ImportExport\Writer;
 
 use Doctrine\ORM\EntityManager;
+use EasyCSV\Writer;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class CsvWriter implements WriterInterface
 {
-    public function write(array $items, array $configuration)
+    /**
+     * Is EasySCV\Writer initialized
+     *
+     * @var boolean
+     */
+    private $running = false;
+
+    /**
+     * @var Writer
+     */
+    private $csvWriter;
+
+    /**
+     * @var array
+     */
+    private $configuration;
+
+    public function write(array $items)
     {
-        
+        if (!$this->running) {
+            $this->csvWriter = new Writer($this->configuration['file'], 'w');
+            $this->csvWriter->setDelimiter($this->configuration['delimiter']);
+            $this->csvWriter->setEnclosure($this->configuration['enclosure']);
+            $this->running = true;
+        }
+
+        $this->csvWriter->writeRow($items);
+    }
+
+    /**
+     * @param array $configuration
+     */
+    public function setConfiguration(array $configuration)
+    {
+        $this->configuration = $configuration;
     }
 
     /**

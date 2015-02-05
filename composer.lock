@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0d9e0b92a100277408cbb7330be717a2",
+    "hash": "5ec71a5530ad382047d6f6f1094e6f86",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -144,79 +144,6 @@
                 "transliterator"
             ],
             "time": "2014-05-15 22:08:22"
-        },
-        {
-            "name": "ddeboer/data-import",
-            "version": "dev-doctrine-reader-field-names",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Zales0123/data-import.git",
-                "reference": "b27b97a7fb1c7c6be2ff4cbf9351832b637e47ad"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Zales0123/data-import/zipball/b27b97a7fb1c7c6be2ff4cbf9351832b637e47ad",
-                "reference": "b27b97a7fb1c7c6be2ff4cbf9351832b637e47ad",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "psr/log": "~1.0"
-            },
-            "require-dev": {
-                "doctrine/dbal": "*",
-                "doctrine/orm": "*",
-                "ext-iconv": "*",
-                "ext-mbstring": "*",
-                "ext-sqlite3": "*",
-                "phpoffice/phpexcel": "*",
-                "phpunit/phpunit": "3.7.*",
-                "symfony/console": "~2.5.0",
-                "symfony/property-access": "*",
-                "symfony/validator": "~2.3.0"
-            },
-            "suggest": {
-                "doctrine/dbal": "If you want to use the DbalReader",
-                "ext-iconv": "For the CharsetValueConverter",
-                "ext-mbstring": "For the CharsetValueConverter",
-                "phpoffice/phpexcel": "If you want to use the ExcelReader",
-                "symfony/console": "If you want to use the ConsoleProgressWriter",
-                "symfony/property-access": "If you want to use the ObjectConverter",
-                "symfony/validator": "to use the ValidatorFilter"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Ddeboer\\DataImport": "src"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "David de Boer",
-                    "email": "david@ddeboer.nl"
-                },
-                {
-                    "name": "The community",
-                    "homepage": "https://github.com/ddeboer/data-import/graphs/contributors"
-                }
-            ],
-            "description": "Import data from, and export data to, a range of file formats and media",
-            "keywords": [
-                "csv",
-                "data",
-                "doctrine",
-                "excel",
-                "export",
-                "import"
-            ],
-            "support": {
-                "issues": "https://github.com/ddeboer/data-import/issues",
-                "source": "https://github.com/ddeboer/data-import"
-            },
-            "time": "2015-02-04 13:44:15"
         },
         {
             "name": "doctrine/annotations",
@@ -2602,6 +2529,55 @@
                 "webinterface"
             ],
             "time": "2013-06-08 14:08:19"
+        },
+        {
+            "name": "jwage/easy-csv",
+            "version": "0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jwage/easy-csv.git",
+                "reference": "8cd61921473a39a35e5750af22648388177776d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jwage/easy-csv/zipball/8cd61921473a39a35e5750af22648388177776d4",
+                "reference": "8cd61921473a39a35e5750af22648388177776d4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "EasyCSV": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com",
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
+                }
+            ],
+            "description": "Easy CSV manipulation for PHP 5.4+",
+            "homepage": "http://github.com/jwage/easy-csv",
+            "keywords": [
+                "csv",
+                "read",
+                "write"
+            ],
+            "time": "2014-02-23 18:12:04"
         },
         {
             "name": "klarna/checkout",
@@ -5622,63 +5598,6 @@
                 "phpcr"
             ],
             "time": "2014-11-17 10:54:18"
-        },
-        {
-            "name": "phpoffice/phpexcel",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PHPOffice/PHPExcel.git",
-                "reference": "c40bb233bfa59fe8aadc6f3714cf500ec2c38e0f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/c40bb233bfa59fe8aadc6f3714cf500ec2c38e0f",
-                "reference": "c40bb233bfa59fe8aadc6f3714cf500ec2c38e0f",
-                "shasum": ""
-            },
-            "require": {
-                "ext-xml": "*",
-                "ext-xmlwriter": "*",
-                "php": ">=5.2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "PHPExcel": "Classes/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL"
-            ],
-            "authors": [
-                {
-                    "name": "Maarten Balliauw",
-                    "homepage": "http://blog.maartenballiauw.be"
-                },
-                {
-                    "name": "Mark Baker"
-                },
-                {
-                    "name": "Franck Lefevre",
-                    "homepage": "http://blog.rootslabs.net"
-                },
-                {
-                    "name": "Erik Tilt"
-                }
-            ],
-            "description": "PHPExcel - OpenXML - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
-            "homepage": "http://phpexcel.codeplex.com",
-            "keywords": [
-                "OpenXML",
-                "excel",
-                "php",
-                "spreadsheet",
-                "xls",
-                "xlsx"
-            ],
-            "time": "2014-12-18 21:56:47"
         },
         {
             "name": "phpoption/phpoption",
@@ -9334,14 +9253,12 @@
         "knplabs/knp-gaufrette-bundle": 20,
         "knplabs/knp-snappy-bundle": 20,
         "mathiasverraes/money": 20,
-        "willdurand/hateoas-bundle": 0,
-        "ddeboer/data-import": 20,
-        "phpoffice/phpexcel": 20
+        "willdurand/hateoas-bundle": 0
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.3"
+        "php": ">=5.4"
     },
     "platform-dev": []
 }

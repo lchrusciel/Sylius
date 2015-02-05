@@ -46,6 +46,7 @@
         </service>
         
         <service id="sylius.import_export.exporter" class="%sylius.import_export.exporter.class%">
+            <argument type="service" id="sylius.registry.export.reader" />
             <argument type="service" id="sylius.registry.export.writer" />
         </service>
         
