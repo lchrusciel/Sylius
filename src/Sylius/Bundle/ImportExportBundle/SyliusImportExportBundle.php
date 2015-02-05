@@ -53,8 +53,10 @@ class SyliusImportExportBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\ImportExport\Model\ExportProfileInterface' => 'sylius.model.export_profile.class',
             'Sylius\Component\ImportExport\Model\ExportJobInterface'     => 'sylius.model.export_job.class',
+            'Sylius\Component\ImportExport\Model\ExportProfileInterface' => 'sylius.model.export_profile.class',
+            'Sylius\Component\ImportExport\Model\ImportJobInterface'     => 'sylius.model.import_job.class',
+            'Sylius\Component\ImportExport\Model\ImportProfileInterface' => 'sylius.model.import_profile.class',
         );
     }
 

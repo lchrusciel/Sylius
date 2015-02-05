@@ -17,22 +17,34 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.registry.export.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+        <parameter key="sylius.registry.class">Sylius\Component\Registry\ServiceRegistry</parameter>
         
         <parameter key="sylius.import_export.exporter.class">Sylius\Component\ImportExport\Exporter</parameter>
-        <parameter key="sylius.form.type.writer_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Writer\WriterChoiceType</parameter>
+        <parameter key="sylius.form.type.writer_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Writer\ExportWriterChoiceType</parameter>
+        <!-- <parameter key="sylius.form.type.reader_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Writer\ExportReaderChoiceType</parameter> -->
+
+        <!-- <parameter key="sylius.import_export.importer.class">Sylius\Component\ImportExport\Importer</parameter>  -->
+        <!-- <parameter key="sylius.form.type.writer_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Writer\ImportWriterChoiceType</parameter>
+        <parameter key="sylius.form.type.reader_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Writer\ImportReaderChoiceType</parameter> -->
 
         <parameter key="sylius.export.csv_writer.class">Sylius\Component\ImportExport\Writer\CsvWriter</parameter>
         <parameter key="sylius.export.excel_writer.class">Sylius\Component\ImportExport\Writer\ExcelWriter</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.registry.export.reader" class="%sylius.registry.export.class%">
-            <argument>Sylius\Component\ImportExport\Reader\ReaderInterface</argument>
-        </service>
-        <service id="sylius.registry.export.writer" class="%sylius.registry.export.class%">
+        <service id="sylius.registry.export.writer" class="%sylius.registry.class%">
             <argument>Sylius\Component\ImportExport\Writer\WriterInterface</argument>
         </service>
+        <service id="sylius.registry.export.reader" class="%sylius.registry.class%">
+            <argument>Sylius\Component\ImportExport\Reader\ReaderInterface</argument>
+        </service>
+        <service id="sylius.registry.import.writer" class="%sylius.registry.class%">
+            <argument>Sylius\Component\ImportExport\Writer\WriterInterface</argument>
+        </service>
+        <service id="sylius.registry.import.reader" class="%sylius.registry.class%">
+            <argument>Sylius\Component\ImportExport\Reader\ReaderInterface</argument>
+        </service>
+        
         <service id="sylius.import_export.exporter" class="%sylius.import_export.exporter.class%">
             <argument type="service" id="sylius.registry.export.reader" />
             <argument type="service" id="sylius.registry.export.writer" />
