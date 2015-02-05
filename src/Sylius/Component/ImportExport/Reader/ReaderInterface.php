@@ -17,12 +17,21 @@ namespace Sylius\Component\ImportExport\Reader;
 interface ReaderInterface
 {
     /**
-     * {@inheritdoc}
+     * Reads data based on given configuration
+     *
+     * @return array
      */
     public function read();
 
     /**
+     * Sets reader configuration
+     *
      * @param array $configuration
      */
     public function setConfiguration(array $configuration);
+
+    /**
+     * @return string
+     */
+    public function getType();
 }

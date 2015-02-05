@@ -9,27 +9,28 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\ImportExport\Writer;
+namespace spec\Sylius\Component\ImportExport\Reader;
 
 use PhpSpec\ObjectBehavior;
+use Doctrine\ORM\EntityManager;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ExcelWriterSpec extends ObjectBehavior
-{
+class CsvReaderSpec extends ObjectBehavior
+{  
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\ImportExport\Writer\ExcelWriter');
+        $this->shouldHaveType('Sylius\Component\ImportExport\Reader\CsvReader');
     }
 
-    function it_implements_exporter_interface()
+    function it_implements_reader_interface()
     {
-        $this->shouldImplement('Sylius\Component\ImportExport\Writer\WriterInterface');
+        $this->shouldImplement('Sylius\Component\ImportExport\Reader\ReaderInterface');
     }
 
     function it_has_type()
     {
-        $this->getType()->shouldReturn('excel');
+        $this->getType()->shouldReturn('csv');
     }
 }

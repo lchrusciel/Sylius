@@ -15,7 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManager;
 
 /**
- * 
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class CsvWriterSpec extends ObjectBehavior

@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class WriterChoiceTypeSpec extends ObjectBehavior
+class ExportWriterChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -26,7 +26,7 @@ class WriterChoiceTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ImportExportBundle\Form\Type\Writer\WriterChoiceType');
+        $this->shouldHaveType('Sylius\Bundle\ImportExportBundle\Form\Type\Writer\ExportWriterChoiceType');
     }
 
     function it_sets_default_options(OptionsResolverInterface $resolver)
