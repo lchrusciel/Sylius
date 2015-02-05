@@ -20,28 +20,28 @@ use Sylius\Component\ImportExport\Writer\CsvWriter;
 /**
 * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
 */
-class ExportDataToCsvCommand extends ContainerAwareCommand
+class ExportDataCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('sylius:export:csv:test')
-            ->setDescription('Test command for exporting data to csv file.')
+            ->setName('sylius:export')
+            ->setDescription('Command for exporting data based on export profile.')
             ->addArgument(
-                'file',
+                'code',
                 InputArgument::REQUIRED,
-                'Path to csv file to be saved.'
+                'Code of export profile, which data will be saved.'
             )
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $csvWriter = new CsvWriter();
-        $csvWriter->setConfiguration(array('file' => $input->getArgument('file'), 'delimiter' => '|', 'enclosure' => '*'));
-        $csvWriter->write(array('item1', 'item2, item3, item4'));
-        $csvWriter->write(array('item1.1, item2.1, item3.1'));
+        $exportProfile = $this->getContainer()->get('sylius.repository.export_profile')->find(array('code' => $input->getArgument('code')));
+        if ($exportProfile === null) {
+            throw new \InvalidArgumentException('There is no export profile with given code.');
+        }
 
-        $output->writeln(sprintf('File %s has been created.', $input->getArgument('file')));
+        $this->getContainer()->get('sylius.import_export.exporter')->export($exportProfile);
     }
 }

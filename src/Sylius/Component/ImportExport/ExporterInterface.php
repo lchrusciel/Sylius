@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\ImportExport\Exporter;
+namespace Sylius\Component\ImportExport;
 
 use Sylius\Component\ImportExport\Model\ExportProfile;
 
@@ -19,11 +19,7 @@ use Sylius\Component\ImportExport\Model\ExportProfile;
 interface ExporterInterface
 {
     /**
-     *
-     * @param ExporterInterface $exporter
-     * @param Data              $data
-     *
-     * @return integer
+     * @param ExportProfileInterface $exportProfile
      */
-    public function export(ExportProfile $exporter);
+    public function export(ExportProfileInterface $exportProfile);
 }
