@@ -49,12 +49,11 @@ abstract class AbstractDoctrineReader implements ReaderInterface
         
         return $results;
     }
-    
-    public abstract function process($result);
-    public abstract function getType();
 
     public function setConfiguration (array $configuration)
     {
         $this->configuration = $configuration;
-    }
+    }  
+
+    protected abstract function process($result);
 }

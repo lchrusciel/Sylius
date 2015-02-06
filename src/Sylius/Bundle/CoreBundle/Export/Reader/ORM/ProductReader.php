@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Export\Reader\ORM;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * Export user reader.
@@ -22,12 +22,28 @@ class ProductReader extends AbstractDoctrineReader
 {
     private $productRepository;
     
-    public function __construct(RepositoryInterface $productRepository)
+    public function __construct(EntityRepository $productRepository)
     {
         $this->productRepository = $productRepository;
     }
     
-    public function process($product)
+    protected function getQuery()
+    {
+        $query = $this->productRepository->createQueryBuilder('p')
+            ->getQuery();
+        
+        return $query;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getType()
+    {
+        return 'product';
+    }
+    
+    protected function process($product)
     {        
         $archetype = $product->getArchetype();
         $taxCategory = $product->getTaxCategory();
@@ -48,21 +64,5 @@ class ProductReader extends AbstractDoctrineReader
             'meta_description' => $product->getMetaDescription(),
             'createdAt' => $createdAt,
         );
-    }
-    
-    public function getQuery()
-    {
-        $query = $this->productRepository->createQueryBuilder('p')
-            ->getQuery();
-        
-        return $query;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getType()
-    {
-        return 'product';
     }
 }

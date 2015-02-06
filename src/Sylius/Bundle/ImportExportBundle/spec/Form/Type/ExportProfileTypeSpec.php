@@ -47,6 +47,7 @@ class ExportProfileTypeSpec extends ObjectBehavior
         $builder->add('name', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('code', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('description', 'textarea', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->add('reader', 'sylius_reader_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('writer', 'sylius_writer_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
 
         $this->buildForm($builder, array());

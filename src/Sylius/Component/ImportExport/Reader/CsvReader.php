@@ -22,6 +22,13 @@ use EasyCSV\Reader;
 class CsvReader implements ReaderInterface
 {
     /**
+     * Is EasySCV\Reader initialized
+     *
+     * @var boolean
+     */
+    private $running = false;
+
+    /**
      * @var Reader
      */
     private $csvReader;
@@ -36,11 +43,14 @@ class CsvReader implements ReaderInterface
      */
     public function read()
     {
-        $this->csvReader = new Reader($this->configuration['file'], 'r', $this->configuration["headers"]);
-        $this->csvReader->setDelimiter($this->configuration['delimiter']);
-        $this->csvReader->setEnclosure($this->configuration['enclosure']);
+        if (!$this->running) {
+            $this->csvReader = new Reader($this->configuration['file'], 'r', $this->configuration["headers"]);
+            $this->csvReader->setDelimiter($this->configuration['delimiter']);
+            $this->csvReader->setEnclosure($this->configuration['enclosure']);
+            $this->running = true;
+        }
         
-        return $this->csvReader->getAll();
+        return $this->csvReader->getRow();
     }
 
     /**

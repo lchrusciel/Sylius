@@ -52,6 +52,9 @@ class ExportProfileType extends AbstractResourceType
                 'label'    => 'sylius.form.export_profile.description',
                 'required' => false,
             ))
+            ->add('reader', 'sylius_reader_choice', array(
+                'label'    => 'sylius.form.reader.name'
+            ))
             ->add('writer', 'sylius_writer_choice', array(
                 'label' => 'sylius.form.writer.name'
             ))
