@@ -149,6 +149,8 @@ sylius:
         generate: Generate
         group:
             index: Groups
+        import_profile:
+            index: Import Profile
         inventory:
             index: Inventory
         locale:
@@ -373,6 +375,17 @@ sylius:
         splash:
             headline: Welcome to Sylius
             subheadline: Modern ecommerce for Symfony2
+    import_profile:
+        create: Create profile
+        create_header: New import profile
+        code: Code
+        id: ID
+        name: Name
+        enabled: Enabled
+        index_header: Import Profiles
+        no_results: There are no profiles to display.
+        update_header: Editing profile
+        updated_at: Last update
     inventory_unit:
         created_at: Created
         inventory_state: Inventory state

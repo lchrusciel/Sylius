@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ExportReaderChoiceType extends AbstractType
+class ReaderChoiceType extends AbstractType
 {
     /**
      * Writers

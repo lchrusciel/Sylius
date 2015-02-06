@@ -20,19 +20,20 @@ use Symfony\Component\Form\FormBuilderInterface;
  * Export profile form type.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
 class ImportProfileType extends AbstractResourceType
 {
-    // protected $importerRegistry;
+    protected $importerWriterRegistry;
+    // protected $importerReaderRegistry;
 
-    public function __construct($dataClass, array $validationGroups
-        // ,ServiceRegistryInterface $importerRegistry
+    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $importerWriterRegistry
+        // ,ServiceRegistryInterface $importerWriterRegistry
         )
     {
         parent::__construct($dataClass, $validationGroups);
 
-        // $this->importerRegistry = $importerRegistry;
+        $this->importerWriterRegistry = $importerWriterRegistry;
+        // $this->importerReaderRegistry = $importerReaderRegistry;
     }
 
     /**
@@ -41,17 +42,18 @@ class ImportProfileType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ->addEventSubscriber(new BuildExportListener($this->importerRegistry, $builder->getFormFactory()))
+            // ->addEventSubscriber(new BuildReaderFormListener($this->importerReaderRegistry, $builder->getFormFactory()))
+            // ->addEventSubscriber(new BuildWriterFormListener($this->importerWriterRegistry, $builder->getFormFactory()))
             ->add('name', 'text', array(
-                'label' => 'sylius.form.export_profile.name',
+                'label' => 'sylius.form.import_profile.name',
                 'required' => true,
             ))
             ->add('code', 'text', array(
-                'label'    => 'sylius.form.export_profile.code',
+                'label'    => 'sylius.form.import_profile.code',
                 'required' => true,
             ))
             ->add('description', 'textarea', array(
-                'label'    => 'sylius.form.export_profile.description',
+                'label'    => 'sylius.form.import_profile.description',
                 'required' => false,
             ))
         ;

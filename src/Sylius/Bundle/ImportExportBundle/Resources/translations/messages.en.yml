@@ -14,5 +14,9 @@ sylius:
                 delimiter: Delimiter
                 enclosure: Enclosure
                 add_header: Add header?
+        import_profile:
+            name: Name
+            description: Description
+            code: Code
         import.export:
             export: export

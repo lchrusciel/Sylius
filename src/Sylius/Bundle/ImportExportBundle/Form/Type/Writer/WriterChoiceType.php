@@ -1,4 +1,4 @@
-<?php
++<?php
 
 /*
  * This file is part of the Sylius package.
@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
-class ExportWriterChoiceType extends AbstractType
+class WriterChoiceType extends AbstractType
 {
     /**
      * Writers
