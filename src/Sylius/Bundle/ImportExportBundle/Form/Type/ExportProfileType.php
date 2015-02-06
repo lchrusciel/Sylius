@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ImportExportBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildExportListener;
+use Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildWriterFormListener;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -39,7 +39,7 @@ class ExportProfileType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new BuildExportListener($this->exporterRegistry, $builder->getFormFactory()))
+            ->addEventSubscriber(new BuildWriterFormListener($this->exporterRegistry, $builder->getFormFactory()))
             ->add('name', 'text', array(
                 'label' => 'sylius.form.export_profile.name',
                 'required' => true,

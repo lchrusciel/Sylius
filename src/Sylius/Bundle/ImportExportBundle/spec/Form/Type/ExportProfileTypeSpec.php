@@ -43,7 +43,7 @@ class ExportProfileTypeSpec extends ObjectBehavior
     ) {
         $builder->getFormFactory()->willReturn($factory);
 
-        $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildExportListener'))->shouldBeCalled()->willReturn($builder);
+        $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildWriterFormListener'))->shouldBeCalled()->willReturn($builder);
         $builder->add('name', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('code', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('description', 'textarea', Argument::any())->shouldBeCalled()->willReturn($builder);

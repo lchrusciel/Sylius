@@ -25,4 +25,10 @@ interface WriterInterface
      * @param array $configuration
      */
     public function setConfiguration(array $configuration);
+
+    /**
+    *
+    * @return Type of data
+    */
+    public function getType();
 }
