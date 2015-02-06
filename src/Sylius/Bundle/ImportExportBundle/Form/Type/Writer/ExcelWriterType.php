@@ -15,11 +15,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Csv writer type
+ * Excel writer type
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CsvWriterType extends AbstractType
+class ExcelWriterType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -27,14 +27,6 @@ class CsvWriterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('delimiter', 'text', array(
-                'label'    => 'sylius.form.writer.csv.delimiter',
-                'data'     => ';',
-            ))
-            ->add('enclosure', 'text', array(
-                'label'    => 'sylius.form.writer.csv.enclosure',
-                'data'     => '"',
-            ))
             ->add('add_header', 'checkbox', array(
                 'label'    => 'sylius.form.writer.csv.add_header',
                 'required' => false,
@@ -51,6 +43,6 @@ class CsvWriterType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_csv_writer';
+        return 'sylius_excel_writer';
     }
 }

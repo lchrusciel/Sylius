@@ -85,8 +85,8 @@ class ExportProfileType extends AbstractResourceType
         ;
 
         $prototypes = array(
-            'readers' => array(),
-            'writers' => array(),
+            'reader' => array(),
+            'writer' => array(),
         );
 
         foreach ($this->readerRegistry->all() as $type => $reader) {

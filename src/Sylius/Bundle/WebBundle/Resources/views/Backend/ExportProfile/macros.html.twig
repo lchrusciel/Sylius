@@ -12,8 +12,8 @@
             <th>{{ sylius_resource_sort('name', 'sylius.export_profile.name'|trans) }}</th>
             <th>{{ sylius_resource_sort('description', 'sylius.export_profile.description'|trans) }}</th>
             <th>{{ sylius_resource_sort('code', 'sylius.export_profile.code'|trans) }}</th>
-            <th>{{ sylius_resource_sort('exporter', 'sylius.export_profile.exporter'|trans) }}</th>
-            <th>{{ sylius_resource_sort('exporterConfiguration', 'sylius.export_profile.exporterConfiguration'|trans) }}</th>
+            <th>{{ sylius_resource_sort('reader', 'sylius.export_profile.reader'|trans) }}</th>
+            <th>{{ sylius_resource_sort('writer', 'sylius.export_profile.writer'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -24,8 +24,8 @@
             <td>{{ export_profile.name }}</td>
             <td>{{ export_profile.description }}</td>
             <td>{{ export_profile.code }}</td>
-            <td>{{ export_profile.exporter }}</td>
-            <td>{{ export_profile.exporterConfiguration }}</td>
+            <td>{{ export_profile.reader }}</td>
+            <td>{{ export_profile.writer }}</td>
             <td>
                 <div class="pull-right">
                 {{ buttons.show(path('sylius_backend_export_profile_show', {'id': export_profile.id})) }}
