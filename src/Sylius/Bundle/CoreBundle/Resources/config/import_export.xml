@@ -24,11 +24,11 @@
         <!-- Export reader -->
         <service id="sylius.export.user_reader" class="%sylius.export.user_reader.class%">
             <argument type="service" id="sylius.repository.user" />
-            <tag name="sylius.export.reader" writer="user_reader" label="User reader" />
+            <tag name="sylius.export.reader" reader="user_reader" label="User reader" />
         </service>
         <service id="sylius.export.product_reader" class="%sylius.export.product_reader.class%">
             <argument type="service" id="sylius.repository.product" />
-            <tag name="sylius.export.reader" writer="product_reader" label="Product reader" />
+            <tag name="sylius.export.reader" reader="product_reader" label="Product reader" />
         </service>
     </services>
 </container>

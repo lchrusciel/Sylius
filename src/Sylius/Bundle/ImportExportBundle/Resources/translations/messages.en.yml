@@ -14,5 +14,8 @@ sylius:
                 delimiter: Delimiter
                 enclosure: Enclosure
                 add_header: Add header?
+        reader:
+            name: Reader
+            batch_size: Rows number
         import.export:
             export: export

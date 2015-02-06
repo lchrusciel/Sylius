@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ImportExportBundle\Form\Type\Writer;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

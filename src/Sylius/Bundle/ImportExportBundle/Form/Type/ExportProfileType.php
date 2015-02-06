@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ImportExportBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildWriterFormListener;
+use Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildReaderFormListener;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -24,13 +25,15 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class ExportProfileType extends AbstractResourceType
 {
-    protected $exporterRegistry;
+    protected $readerRegistry;
+    protected $writerRegistry;
 
-    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $exporterRegistry)
+    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $readerRegistry, ServiceRegistryInterface $writerRegistry)
     {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->exporterRegistry = $exporterRegistry;
+        $this->readerRegistry = $readerRegistry;
+        $this->writerRegistry = $writerRegistry;
     }
 
     /**
@@ -39,7 +42,8 @@ class ExportProfileType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new BuildWriterFormListener($this->exporterRegistry, $builder->getFormFactory()))
+            ->addEventSubscriber(new BuildReaderFormListener($this->readerRegistry, $builder->getFormFactory()))
+            ->addEventSubscriber(new BuildWriterFormListener($this->writerRegistry, $builder->getFormFactory()))
             ->add('name', 'text', array(
                 'label' => 'sylius.form.export_profile.name',
                 'required' => true,

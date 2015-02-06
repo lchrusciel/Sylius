@@ -21,7 +21,7 @@
         
         <parameter key="sylius.import_export.exporter.class">Sylius\Component\ImportExport\Exporter</parameter>
         <parameter key="sylius.form.type.writer_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Writer\ExportWriterChoiceType</parameter>
-        <!-- <parameter key="sylius.form.type.reader_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Writer\ExportReaderChoiceType</parameter> -->
+        <parameter key="sylius.form.type.reader_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Reader\ExportReaderChoiceType</parameter>
 
         <!-- <parameter key="sylius.import_export.importer.class">Sylius\Component\ImportExport\Importer</parameter>  -->
         <!-- <parameter key="sylius.form.type.writer_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Writer\ImportWriterChoiceType</parameter>
@@ -54,12 +54,16 @@
             <argument>%sylius.writers%</argument>
             <tag name="form.type" alias="sylius_writer_choice" />
         </service>
-
         <service id="sylius.export.csv_writer" class="%sylius.export.csv_writer.class%">
             <tag name="sylius.export.writer" writer="csv_writer" label="CSV writer" />
         </service>
         <service id="sylius.export.excel_writer" class="%sylius.export.excel_writer.class%">
             <tag name="sylius.export.writer" writer="excel_writer" label="Excel writer" />
+        </service>
+
+        <service id="sylius.form.type.reader_choice" class="%sylius.form.type.reader_choice.class%">
+            <argument>%sylius.readers%</argument>
+            <tag name="form.type" alias="sylius_reader_choice" />
         </service>
     </services>
 
