@@ -14,7 +14,7 @@ namespace Sylius\Component\ImportExport;
 use Sylius\Component\ImportExport\Model\ImportProfileInterface;
 
 /**
- * @author Mateusz Zalewski <zaleslaw@.gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 interface ImporterInterface
 {

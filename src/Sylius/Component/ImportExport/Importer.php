@@ -24,16 +24,27 @@ class Importer implements ImporterInterface
      *
      * @var ServiceRegistryInterface
      */
-    private $registry;
+    private $readerRegistry;
+
+    /**
+     * Importer registry
+     *
+     * @var ServiceRegistryInterface
+     */
+    private $writerRegistry;
 
     /**
      * Constructor
      *
-     * @var ServiceRegistryInterface $registry
+     * @var ServiceRegistryInterface $readerRegistry
+     * @var ServiceRegistryInterface $writerRegistry
      */
-    public function __construct(ServiceRegistryInterface $registry)
+    public function __construct(ServiceRegistryInterface $readerRegistry
+        // , ServiceRegistryInterface $writerRegistry
+        )
     {
-        $this->registry = $registry;
+        $this->readerRegistry = $readerRegistry;
+        // $this->writerRegistry = $writerRegistry;
     }
 
     /**
@@ -44,7 +55,7 @@ class Importer implements ImporterInterface
         if (null === $type = $importProfile->getImporter()) {
             throw new \InvalidArgumentException('Cannot import data with ImportProfile instance without importer defined.');
         }
-        $importer = $this->registry->get($type);
+        $importer = $this->readerRegistry->get($type);
         return $importer->import($importProfile->getEntity(), $importProfile->getFields(), $importProfile->getImporterConfiguration());
     }
 }

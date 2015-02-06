@@ -26,8 +26,8 @@ class ImportProfileType extends AbstractResourceType
 {
     // protected $importerRegistry;
 
-    public function __construct($dataClass, array $validationGroups, 
-        // ServiceRegistryInterface $importerRegistry
+    public function __construct($dataClass, array $validationGroups
+        // ,ServiceRegistryInterface $importerRegistry
         )
     {
         parent::__construct($dataClass, $validationGroups);
