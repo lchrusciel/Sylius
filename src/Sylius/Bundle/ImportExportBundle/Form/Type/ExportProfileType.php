@@ -16,6 +16,9 @@ use Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildWriterFormListener;
 use Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildReaderFormListener;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
+
 
 /**
  * Export profile form type.
@@ -25,9 +28,26 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class ExportProfileType extends AbstractResourceType
 {
+    /**
+     * Reader registry
+     *
+     * @var ServiceRegistryInterface
+     */
     protected $readerRegistry;
+
+    /**
+     * Writer registry
+     *
+     * @var ServiceRegistryInterface
+     */
     protected $writerRegistry;
 
+    /**
+     * Constructor
+     *
+     * @param ServiceRegistryInterface $readerRegistry
+     * @param ServiceRegistryInterface $writerRegistry
+     */
     public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $readerRegistry, ServiceRegistryInterface $writerRegistry)
     {
         parent::__construct($dataClass, $validationGroups);
@@ -63,6 +83,55 @@ class ExportProfileType extends AbstractResourceType
                 'label' => 'sylius.form.writer.name'
             ))
         ;
+
+        $prototypes = array(
+            'readers' => array(),
+            'writers' => array(),
+        );
+
+        foreach ($this->readerRegistry->all() as $type => $reader) {
+            $formType = sprintf('sylius_%s_reader', $reader->getType());
+
+            if (!$formType) {
+                continue;
+            }
+
+            try {
+                $prototypes['reader'][$type] = $builder->create('readerConfiguration', $formType)->getForm();
+            } catch (\InvalidArgumentException $e) {
+                continue;
+            }
+        }
+
+        foreach ($this->writerRegistry->all() as $type => $writer) {
+            $formType = sprintf('sylius_%s_writer', $writer->getType());
+
+            if (!$formType) {
+                continue;
+            }
+
+            try {
+                $prototypes['writer'][$type] = $builder->create('writerConfiguration', $formType)->getForm();
+            } catch (\InvalidArgumentException $e) {
+                continue;
+            }
+        }
+
+        $builder->setAttribute('prototypes', $prototypes);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->vars['prototypes'] = array();
+
+        foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
+            foreach ($prototypes as $type => $prototype) {
+                $view->vars['prototypes'][$group][$group.'_'.$type] = $prototype->createView($view);
+            }
+        }
     }
 
     /**
