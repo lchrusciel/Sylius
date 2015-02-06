@@ -22,9 +22,9 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
  */
 class ExportProfileTypeSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $exporterRegistry)
+    function let(ServiceRegistryInterface $readerRegistry, ServiceRegistryInterface $writerRegistry)
     {
-        $this->beConstructedWith('Sylius\Component\ImportExport\Model\ExportProfile', array('sylius'), $exporterRegistry);
+        $this->beConstructedWith('Sylius\Component\ImportExport\Model\ExportProfile', array('sylius'), $readerRegistry, $writerRegistry);
     }   
 
     function it_is_initializable()
@@ -44,6 +44,7 @@ class ExportProfileTypeSpec extends ObjectBehavior
         $builder->getFormFactory()->willReturn($factory);
 
         $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildWriterFormListener'))->shouldBeCalled()->willReturn($builder);
+        $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildReaderFormListener'))->shouldBeCalled()->willReturn($builder);
         $builder->add('name', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('code', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('description', 'textarea', Argument::any())->shouldBeCalled()->willReturn($builder);

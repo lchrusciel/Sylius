@@ -7,6 +7,10 @@ sylius:
             name: Name
             description: Description
             code: Code
+        import_profile:
+            name: Name
+            description: Description
+            code: Code
         writer:
             name: Writer
             file: File path
@@ -14,9 +18,8 @@ sylius:
                 delimiter: Delimiter
                 enclosure: Enclosure
                 add_header: Add header?
-        import_profile:
-            name: Name
-            description: Description
-            code: Code
+        reader:
+            name: Reader
+            batch_size: Rows number
         import.export:
             export: export
