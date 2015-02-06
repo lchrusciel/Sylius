@@ -43,6 +43,7 @@ class SyliusImportExportExtension extends AbstractResourceExtension
         
         $container
             ->getDefinition('sylius.form.type.import_profile')
+            ->addArgument(new Reference('sylius.registry.import.reader'))
             ->addArgument(new Reference('sylius.registry.import.writer'))
         ;
     }

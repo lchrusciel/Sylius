@@ -11,10 +11,13 @@
 
 namespace Sylius\Bundle\ImportExportBundle\Form\Type;
 
+use Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildReaderFormListener;
+use Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildWriterFormListener;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildExportListener;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 
 /**
  * Export profile form type.
@@ -23,17 +26,32 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class ImportProfileType extends AbstractResourceType
 {
-    protected $importerWriterRegistry;
-    // protected $importerReaderRegistry;
+    /**
+     * Reader registry
+     *
+     * @var ServiceRegistryInterface
+     */
+    protected $readerRegistry;
 
-    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $importerWriterRegistry
-        // ,ServiceRegistryInterface $importerWriterRegistry
-        )
+    /**
+     * Writer registry
+     *
+     * @var ServiceRegistryInterface
+     */
+    protected $writerRegistry;
+
+    /**
+     * Constructor
+     *
+     * @param ServiceRegistryInterface $readerRegistry
+     * @param ServiceRegistryInterface $writerRegistry
+     */
+    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $readerRegistry, ServiceRegistryInterface $writerRegistry)
     {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->importerWriterRegistry = $importerWriterRegistry;
-        // $this->importerReaderRegistry = $importerReaderRegistry;
+        $this->writerRegistry = $writerRegistry;
+        $this->readerRegistry = $readerRegistry;
     }
 
     /**
@@ -42,10 +60,10 @@ class ImportProfileType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ->addEventSubscriber(new BuildReaderFormListener($this->importerReaderRegistry, $builder->getFormFactory()))
-            // ->addEventSubscriber(new BuildWriterFormListener($this->importerWriterRegistry, $builder->getFormFactory()))
+            ->addEventSubscriber(new BuildReaderFormListener($this->readerRegistry, $builder->getFormFactory()))
+            // ->addEventSubscriber(new BuildWriterFormListener($this->writerRegistry, $builder->getFormFactory()))
             ->add('name', 'text', array(
-                'label' => 'sylius.form.import_profile.name',
+                'label'    => 'sylius.form.import_profile.name',
                 'required' => true,
             ))
             ->add('code', 'text', array(
@@ -56,7 +74,60 @@ class ImportProfileType extends AbstractResourceType
                 'label'    => 'sylius.form.import_profile.description',
                 'required' => false,
             ))
+            ->add('reader', 'sylius_import_reader_choice', array(
+                'label'    => 'sylius.form.reader.name',
+                'required' => true,
+            ))
         ;
+
+        $prototypes = array(
+            'readers' => array(),
+            'writers' => array(),
+        );
+
+        foreach ($this->readerRegistry->all() as $type => $reader) {
+            $formType = sprintf('sylius_%s_reader', $reader->getType());
+
+            if (!$formType) {
+                continue;
+            }
+
+            try {
+                $prototypes['reader'][$type] = $builder->create('readerConfiguration', $formType)->getForm();
+            } catch (\InvalidArgumentException $e) {
+                continue;
+            }
+        }
+
+        // foreach ($this->writerRegistry->all() as $type => $writer) {
+        //     $formType = sprintf('sylius_%s_writer', $writer->getType());
+
+        //     if (!$formType) {
+        //         continue;
+        //     }
+
+        //     try {
+        //         $prototypes['writer'][$type] = $builder->create('writerConfiguration', $formType)->getForm();
+        //     } catch (\InvalidArgumentException $e) {
+        //         continue;
+        //     }
+        // }
+
+        $builder->setAttribute('prototypes', $prototypes);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->vars['prototypes'] = array();
+
+        foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
+            foreach ($prototypes as $type => $prototype) {
+                $view->vars['prototypes'][$group][$group.'_'.$type] = $prototype->createView($view);
+            }
+        }
     }
 
     /**

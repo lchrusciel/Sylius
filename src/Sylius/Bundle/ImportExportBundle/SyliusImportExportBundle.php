@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ImportExportBundle;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ImportExportBundle\DependencyInjection\Compiler\RegisterWritersPass;
-use Sylius\Bundle\ImportExportBundle\DependencyInjection\Compiler\RegisterExportReadersPass;
+use Sylius\Bundle\ImportExportBundle\DependencyInjection\Compiler\RegisterReadersPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -46,7 +46,7 @@ class SyliusImportExportBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new RegisterWritersPass());
-        $container->addCompilerPass(new RegisterExportReadersPass());
+        $container->addCompilerPass(new RegisterReadersPass());
     }
 
     /**

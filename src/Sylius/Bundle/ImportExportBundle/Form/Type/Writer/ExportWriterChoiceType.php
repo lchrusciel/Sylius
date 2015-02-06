@@ -9,40 +9,41 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ImportExportBundle\Form\Type\Reader;
+namespace Sylius\Bundle\ImportExportBundle\Form\Type\Writer;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Reader choice choice type.
+ * Writer choice choice type.
  *
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
-class ReaderChoiceType extends AbstractType
+class ExportWriterChoiceType extends AbstractType
 {
     /**
      * Writers
      *
      * @var array
      */
-    protected $readers;
+    protected $writers;
 
     /** 
      * Constructor
      * 
-     * @param array $readers
+     * @param array $writers
      */
-    public function __construct(array $readers)
+    public function __construct(array $writers)
     {
-        $this->readers = $readers;
+        $this->writers = $writers;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
-                'choices' => $this->readers
+                'choices' => $this->writers
             ))
         ;
     }
@@ -54,6 +55,6 @@ class ReaderChoiceType extends AbstractType
 
     public function getName()
     {
-        return 'sylius_reader_choice';
+        return 'sylius_export_writer_choice';
     }
 }
