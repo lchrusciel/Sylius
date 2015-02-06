@@ -308,14 +308,20 @@ sylius:
     export_profile:
         create: Create profile
         create_header: New export profile
+        manage: Manage
         code: Code
         id: ID
         name: Name
-        enabled: Enabled
+        description: Description
+        reader: Reader
+        reader_configuration: Reader configuration
+        writer: Writer
+        writer_configuration: Writer configuration
         index_header: Export Profiles
         no_results: There are no profiles to display.
         update_header: Editing profile
         updated_at: Last update
+        general_info: General info
     filter: Filter
     form:
         cart:

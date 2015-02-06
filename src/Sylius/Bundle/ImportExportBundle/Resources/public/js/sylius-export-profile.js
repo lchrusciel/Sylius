@@ -10,8 +10,13 @@
     'use strict';
 
     $(document).ready(function() {
-        $('#sylius_export').handlePrototypes({
-            'prototypePrefix': 'sylius_export_profile_exporter_exporters'
+        $('#sylius_export_profile_reader').handlePrototypes({
+            'prototypePrefix': 'sylius_export_profile_reader_reader',
+            'prototypeElementPrefix': '',
+        });
+        $('#sylius_export_profile_writer').handlePrototypes({
+            'prototypePrefix': 'sylius_export_profile_writer_writer',
+            'prototypeElementPrefix': '',
         });
     });
 })( jQuery );

@@ -27,6 +27,7 @@
         <parameter key="sylius.form.type.reader.user_type.class">Sylius\Bundle\ImportExportBundle\Form\Type\Reader\UserReaderType</parameter>
 
         <parameter key="sylius.form.type.writer.csv_type.class">Sylius\Bundle\ImportExportBundle\Form\Type\Writer\CsvWriterType</parameter>
+        <parameter key="sylius.form.type.writer.excel_type.class">Sylius\Bundle\ImportExportBundle\Form\Type\Writer\ExcelWriterType</parameter>
 
         <!-- <parameter key="sylius.import_export.importer.class">Sylius\Component\ImportExport\Importer</parameter>  -->
         <!-- <parameter key="sylius.form.type.writer_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Writer\ImportWriterChoiceType</parameter>
@@ -68,6 +69,9 @@
         </service>
         <service id="sylius.export.excel_writer" class="%sylius.export.excel_writer.class%">
             <tag name="sylius.export.writer" writer="excel_writer" label="Excel writer" />
+        </service>
+        <service id="sylius.form.type.writer.excel_type" class="%sylius.form.type.writer.excel_type.class%">
+            <tag name="form.type" alias="sylius_excel_writer" />
         </service>
 
         <service id="sylius.form.type.reader_choice" class="%sylius.form.type.reader_choice.class%">
