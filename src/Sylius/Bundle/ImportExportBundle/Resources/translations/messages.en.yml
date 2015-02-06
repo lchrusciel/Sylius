@@ -21,5 +21,10 @@ sylius:
         reader:
             name: Reader
             batch_size: Rows number
+            file: File path
+            csv:
+                delimiter: Delimiter
+                enclosure: Enclosure
+                header: Was header set?
         import.export:
             export: export

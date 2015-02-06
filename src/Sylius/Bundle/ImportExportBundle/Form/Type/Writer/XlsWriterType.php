@@ -15,11 +15,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Excel writer type
+ * Xls writer type
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ExcelWriterType extends AbstractType
+class XlsWriterType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -43,6 +43,6 @@ class ExcelWriterType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_excel_writer';
+        return 'sylius_xls_writer';
     }
 }

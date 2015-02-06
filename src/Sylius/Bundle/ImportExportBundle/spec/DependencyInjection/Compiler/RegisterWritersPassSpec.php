@@ -28,39 +28,77 @@ class RegisterWritersPassSpec extends ObjectBehavior
     }
 
     public function it_processes_with_given_container(
-        ContainerBuilder $container, Definition $writerDefinition)
+        ContainerBuilder $container, Definition $exportWriterDefinition, Definition $importWriterDefinition)
     {
         $container->hasDefinition('sylius.registry.export.writer')->willReturn(true);
-        $container->getDefinition('sylius.registry.export.writer')->willReturn($writerDefinition);
+        $container->getDefinition('sylius.registry.export.writer')->willReturn($exportWriterDefinition);
+        
+        $container->hasDefinition('sylius.registry.import.writer')->willReturn(true);
+        $container->getDefinition('sylius.registry.import.writer')->willReturn($importWriterDefinition);
+
         $writerServices = array(
             'sylius.form.type.writer.test' => array(
             array('writer' => 'test', 'label' => 'Test writer'),
             ),
         );
+
         $container->findTaggedServiceIds('sylius.export.writer')->willReturn($writerServices);
-        $writerDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.writer.test')))->shouldBeCalled();
-        $container->setParameter('sylius.writers', array('test' => 'Test writer'))->shouldBeCalled();
+        $container->findTaggedServiceIds('sylius.import.writer')->willReturn($writerServices);
+
+        $exportWriterDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.writer.test')))->shouldBeCalled();
+        $importWriterDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.writer.test')))->shouldBeCalled();
+
+        $container->setParameter('sylius.export.writers', array('test' => 'Test writer'))->shouldBeCalled();
+        $container->setParameter('sylius.import.writers', array('test' => 'Test writer'))->shouldBeCalled();
+
         $this->process($container);
     }
 
-    public function it_does_not_process_if_container_has_not_proper_definition(ContainerBuilder $container)
+    public function it_does_not_process_if_container_has_not_proper_export_definition(ContainerBuilder $container)
     {
-        $container->hasDefinition('sylius.registry.writer')->willReturn(false);
-        $container->getDefinition('sylius.registry.writer')->shouldNotBeCalled();
+        $container->hasDefinition('sylius.registry.export.writer')->willReturn(false);
+        $container->getDefinition('sylius.registry.export.writer')->shouldNotBeCalled();
     }
 
-    public function it_throws_exception_if_any_writer_has_improper_attributes(ContainerBuilder $container, Definition $writerDefinition)
+    public function it_does_not_process_if_container_has_not_proper_import_definition(ContainerBuilder $container)
     {
-        $container->hasDefinition('sylius.registry.writer')->willReturn(true);
-        $container->getDefinition('sylius.registry.writer')->willReturn($writerDefinition);
+        $container->hasDefinition('sylius.registry.import.writer')->willReturn(false);
+        $container->getDefinition('sylius.registry.import.writer')->shouldNotBeCalled();
+    }
+
+    public function it_throws_exception_if_any_export_writer_has_improper_attributes(ContainerBuilder $container, Definition $exportWriterDefinition)
+    {
+        $container->hasDefinition('sylius.registry.export.writer')->willReturn(true);
+        $container->getDefinition('sylius.registry.export.writer')->willReturn($exportWriterDefinition);
+
         $writerServices = array(
             'sylius.form.type.writer.test' => array(
             array('writer' => 'test'),
             ),
         );
+
         $container->findTaggedServiceIds('sylius.writer')->willReturn($writerServices);
+
         $this->shouldThrow(new \InvalidArgumentException('Tagged writers needs to have `writer` and `label` attributes.'));
-        $writerDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.writer.test')))->shouldNotBeCalled();
+
+        $exportWriterDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.writer.test')))->shouldNotBeCalled();
     }
 
+    public function it_throws_exception_if_any_import_writer_has_improper_attributes(ContainerBuilder $container, Definition $exportWriterDefinition)
+    {
+        $container->hasDefinition('sylius.registry.import.writer')->willReturn(true);
+        $container->getDefinition('sylius.registry.import.writer')->willReturn($exportWriterDefinition);
+
+        $writerServices = array(
+            'sylius.form.type.writer.test' => array(
+            array('writer' => 'test'),
+            ),
+        );
+
+        $container->findTaggedServiceIds('sylius.writer')->willReturn($writerServices);
+
+        $this->shouldThrow(new \InvalidArgumentException('Tagged writers needs to have `writer` and `label` attributes.'));
+
+        $exportWriterDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.writer.test')))->shouldNotBeCalled();
+    }
 }

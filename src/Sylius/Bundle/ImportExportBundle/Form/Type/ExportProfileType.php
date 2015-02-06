@@ -85,8 +85,8 @@ class ExportProfileType extends AbstractResourceType
         ;
 
         $prototypes = array(
-            'reader' => array(),
-            'writer' => array(),
+            'readers' => array(),
+            'writers' => array(),
         );
 
         foreach ($this->readerRegistry->all() as $type => $reader) {
@@ -97,7 +97,7 @@ class ExportProfileType extends AbstractResourceType
             }
 
             try {
-                $prototypes['reader'][$type] = $builder->create('readerConfiguration', $formType)->getForm();
+                $prototypes['readers'][$type] = $builder->create('readerConfiguration', $formType)->getForm();
             } catch (\InvalidArgumentException $e) {
                 continue;
             }
@@ -111,7 +111,7 @@ class ExportProfileType extends AbstractResourceType
             }
 
             try {
-                $prototypes['writer'][$type] = $builder->create('writerConfiguration', $formType)->getForm();
+                $prototypes['writers'][$type] = $builder->create('writerConfiguration', $formType)->getForm();
             } catch (\InvalidArgumentException $e) {
                 continue;
             }

@@ -15,7 +15,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Writer choice choice type.
+ * Reader choice choice type.
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
@@ -28,19 +28,19 @@ class CsvReaderType extends AbstractType
     {
         $builder
             ->add('delimiter', 'text', array(
-                'label'    => 'sylius.form.writer.csv.delimiter',
+                'label'    => 'sylius.form.reader.csv.delimiter',
                 'data'     => ';',
             ))
             ->add('enclosure', 'text', array(
-                'label'    => 'sylius.form.writer.csv.enclosure',
+                'label'    => 'sylius.form.reader.csv.enclosure',
                 'data'     => '"',
             ))
-            ->add('add_header', 'checkbox', array(
-                'label'    => 'sylius.form.writer.csv.add_header',
+            ->add('header', 'checkbox', array(
+                'label'    => 'sylius.form.reader.csv.header',
                 'required' => false,
             ))
             ->add('file', 'text', array(
-                'label'    => 'sylius.form.writer.file',
+                'label'    => 'sylius.form.reader.file',
                 'required' => true,
             ))
         ;

@@ -93,7 +93,7 @@ class ImportProfileType extends AbstractResourceType
             }
 
             try {
-                $prototypes['reader'][$type] = $builder->create('readerConfiguration', $formType)->getForm();
+                $prototypes['readers'][$type] = $builder->create('readerConfiguration', $formType)->getForm();
             } catch (\InvalidArgumentException $e) {
                 continue;
             }
