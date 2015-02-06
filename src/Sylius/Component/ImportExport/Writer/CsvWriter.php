@@ -52,7 +52,7 @@ class CsvWriter implements WriterInterface
     }
 
     /**
-     * @param array $configuration
+     * {@inheritdoc}
      */
     public function setConfiguration(array $configuration)
     {

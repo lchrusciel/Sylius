@@ -53,7 +53,7 @@ class ExportProfileType extends AbstractResourceType
                 'required' => false,
             ))
             ->add('writer', 'sylius_writer_choice', array(
-                'label' => 'sylius.form.rule.exporter'
+                'label' => 'sylius.form.writer.name'
             ))
         ;
     }

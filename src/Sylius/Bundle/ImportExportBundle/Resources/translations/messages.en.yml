@@ -3,14 +3,16 @@
 
 sylius:
     form:
-        exporter:
+        export_profile:
+            name: Name
+            description: Description
+            code: Code
+        writer:
+            name: Writer
             file: File path
             csv:
                 delimiter: Delimiter
                 enclosure: Enclosure
                 add_header: Add header?
-        rule:
-            type: Rule type
-
         import.export:
             export: export

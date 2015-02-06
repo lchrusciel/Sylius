@@ -31,6 +31,8 @@ interface ReaderInterface
     public function setConfiguration(array $configuration);
 
     /**
+     * Returns type of reader
+     *
      * @return string
      */
     public function getType();

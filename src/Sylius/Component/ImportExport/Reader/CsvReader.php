@@ -15,6 +15,8 @@ use Doctrine\ORM\EntityManager;
 use EasyCSV\Reader;
 
 /**
+ * Csv import reader
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class CsvReader implements ReaderInterface

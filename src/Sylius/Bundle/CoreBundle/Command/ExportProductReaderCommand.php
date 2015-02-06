@@ -9,38 +9,36 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ImportExportBundle\Command;
+namespace Sylius\Bundle\CoreBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
-use Sylius\Component\ImportExport\Reader\CsvReader;
 
 /**
-* @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+* @author Bartosz Siejka <bartosz.siejka@lakion.com>
 */
-class ImportDataCommand extends ContainerAwareCommand
+class ExportProductReaderCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('sylius:import')
-            ->setDescription('Command for importing data based on given data.')
+            ->setName('sylius:export:reader:product')
+            ->setDescription('Test command for export reader class.')
             ->addArgument(
-                'file',
+                'batch_size',
                 InputArgument::REQUIRED,
-                'Path to file that will be imported.'
+                'Number of rows.'
             )
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $filePath = $input->getArgument('file');
+        $userReader = $this->getContainer()->get('sylius.export.product_reader');
+        $userReader->setConfiguration(array('batch_size' => $input->getArgument('batch_size')));
         
-        $reader = new CsvReader();
-        $reader->setConfiguration(array('file' => $filePath, 'delimiter' => ';', 'enclosure' => '*', 'headers' => false));
-        $output->writeln(serialize($reader->read()));
+        $output->writeln(serialize($userReader->read()));
     }
 }

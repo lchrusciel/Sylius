@@ -58,6 +58,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'api_form',
         'templating',
         'twig',
+        'import_export',
     );
 
     private $emails = array(
