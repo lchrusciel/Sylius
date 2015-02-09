@@ -38,6 +38,7 @@
         <parameter key="sylius.export.xls_writer.class">Sylius\Component\ImportExport\Writer\XlsWriter</parameter>
 
         <parameter key="sylius.import.csv_reader.class">Sylius\Component\ImportExport\Reader\CsvReader</parameter>
+        <parameter key="sylius.form.type.writer.product_type.class">Sylius\Bundle\ImportExportBundle\Form\Type\Writer\ProductWriterType</parameter>
     </parameters>
 
     <services>
@@ -113,6 +114,10 @@
 
         <service id="sylius.form.type.reader.csv" class="%sylius.form.type.reader.csv.class%">
             <tag name="form.type" alias="sylius_csv_reader" />
+        </service>
+
+        <service id="sylius.form.type.writer.product_type" class="%sylius.form.type.writer.product_type.class%">
+            <tag name="form.type" alias="sylius_product_writer" />
         </service>
     </services>
 

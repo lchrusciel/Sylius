@@ -22,13 +22,20 @@
             {% endif %}
             </div>
         </div>
-        {# <div class="col-md-6">
+        <div class="col-md-6">
             {{ form_row(form.writer) }}
-            {% for name, writerConfigurationPrototype in form.vars.prototypes.writer %}
+            {% for name, writerConfigurationPrototype in form.vars.prototypes.writers %}
                 <div id="{{ form.writer.vars.id }}_{{ name }}" data-container="#writer.configuration" data-prototype="{{ form_widget(writerConfigurationPrototype)|e }}">
                 </div>
             {% endfor %}
-        </div> #}
+            <div id="writer" class="configuration">
+            {% if form.writerConfiguration is defined %}
+                {% for field in form.writerConfiguration %}
+                    {{ form_row(field) }}
+                {% endfor %}
+            {% endif %}
+            </div>
+        </div>
 </fieldset>
 
 {{ form_rest(form) }}

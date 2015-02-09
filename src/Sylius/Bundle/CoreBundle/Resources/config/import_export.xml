@@ -18,6 +18,8 @@
     <parameters>    
         <parameter key="sylius.export.user_reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\UserReader</parameter>
         <parameter key="sylius.export.product_reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\ProductReader</parameter>
+
+        <parameter key="sylius.import.product_writer.class">Sylius\Bundle\CoreBundle\Import\Writer\ORM\ProductWriter</parameter>
     </parameters>
 
     <services>
@@ -29,6 +31,12 @@
         <service id="sylius.export.product_reader" class="%sylius.export.product_reader.class%">
             <argument type="service" id="sylius.repository.product" />
             <tag name="sylius.export.reader" reader="product_reader" label="Product reader" />
+        </service>
+
+        <!-- Import writer -->
+        <service id="sylius.import.product_writer" class="%sylius.import.product_writer.class%">
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="sylius.import.writer" writer="product_writer" label="Product writer" />
         </service>
     </services>
 </container>

@@ -20,7 +20,7 @@ class ImportProfile extends Profile implements ExportProfileInterface
     {
         $this->reader = 'csv_reader';
         $this->readerConfiguration = array();
-        $this->writer = '';
+        $this->writer = 'product_writer';
         $this->writerConfiguration = array();
     }
 }

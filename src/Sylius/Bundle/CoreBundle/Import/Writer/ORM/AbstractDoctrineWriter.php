@@ -28,12 +28,11 @@ abstract class AbstractDoctrineWriter implements WriterInterface
         foreach ($items as $item)
         {            
             $item = $this->process($item);
-            $results[] = $item;
         }
         
         $em = $this->getDoctrine()->getManager();
 
-        $em->persist($results);
+        $em->persist();
         $em->flush();
     }
 
