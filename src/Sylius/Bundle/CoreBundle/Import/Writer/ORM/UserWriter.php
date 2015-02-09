@@ -33,28 +33,27 @@ class UserWriter extends AbstractDoctrineWriter
         $shippingAddress = $user->setShippingAddress();
         $billingAddress = $user->setBillingAddress();
         
-        $user->setId();
-        $user->setFirstName();
-        $user->setLastName();
-        $user->setUsername();
-        $user->setEmail();
-        $shippingAddress ? $shippingAddress->setCompany() : null;
-        $shippingAddress ? $shippingAddress->setCountry() : null;
-        $shippingAddress ? $shippingAddress->setProvince() : null;
-        $shippingAddress ? $shippingAddress->setCity() : null;
-        $shippingAddress ? $shippingAddress->setStreet() : null;
-        $shippingAddress ? $shippingAddress->setPostcode() : null;
-        $shippingAddress ? $shippingAddress->setPhoneNumber() : null;
-        $billingAddress ? $billingAddress->setCompany() : null;
-        $billingAddress ? $billingAddress->setCountry() : null;
-        $billingAddress ? $billingAddress->setProvince() : null;
-        $billingAddress ? $billingAddress->setCity() : null;
-        $billingAddress ? $billingAddress->setStreet() : null;
-        $billingAddress ? $billingAddress->setPostcode() : null;
-        $billingAddress ? $billingAddress->setPhoneNumber() : null;
-        $user->isEnabled();
-        $user->setCurrency();
-        $user->setCreatedAt();
+        $user->setFirstName($data['first_name']);
+        $user->setLastName($data['last_name']);
+        $user->setUsername($data['username']);
+        $user->setEmail($data['email']);
+        $shippingAddress ? $shippingAddress->setCompany($data['shipping_address_company']) : null;
+        $shippingAddress ? $shippingAddress->setCountry($data['shipping_address_country']) : null;
+        $shippingAddress ? $shippingAddress->setProvince($data['shipping_adress_province']) : null;
+        $shippingAddress ? $shippingAddress->setCity($data['shipping_address_city']) : null;
+        $shippingAddress ? $shippingAddress->setStreet($data['shipping_address_street']) : null;
+        $shippingAddress ? $shippingAddress->setPostcode($data['shipping_address_postcode']) : null;
+        $shippingAddress ? $shippingAddress->setPhoneNumber($data['shipping_adress_phone_number']) : null;
+        $billingAddress ? $billingAddress->setCompany($data['billing_address_company']) : null;
+        $billingAddress ? $billingAddress->setCountry($data['billing_address_country']) : null;
+        $billingAddress ? $billingAddress->setProvince($data['billing_adress_province']) : null;
+        $billingAddress ? $billingAddress->setCity($data['billing_address_city']) : null;
+        $billingAddress ? $billingAddress->setStreet($data['billing_address_street']) : null;
+        $billingAddress ? $billingAddress->setPostcode($data['billing_address_postcode']) : null;
+        $billingAddress ? $billingAddress->setPhoneNumber($data['billing_adress_phone_number']) : null;
+        $user->setEnabled($data['enabled']);
+        $user->setCurrency($data['currency']);
+        $user->setCreatedAt(new \DateTime($data['created_at']));
     }
     
     public function getQuery()
