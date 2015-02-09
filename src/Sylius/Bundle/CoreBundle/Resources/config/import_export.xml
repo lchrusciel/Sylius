@@ -17,6 +17,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd"> 
     <parameters>    
         <parameter key="sylius.export.user_reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\UserReader</parameter>
+        <parameter key="sylius.import.user_writer.class">Sylius\Bundle\CoreBundle\Import\Writer\ORM\UserReader</parameter>
         <parameter key="sylius.export.product_reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\ProductReader</parameter>
 
         <parameter key="sylius.import.product_writer.class">Sylius\Bundle\CoreBundle\Import\Writer\ORM\ProductWriter</parameter>
@@ -27,6 +28,10 @@
         <service id="sylius.export.user_reader" class="%sylius.export.user_reader.class%">
             <argument type="service" id="sylius.repository.user" />
             <tag name="sylius.export.reader" reader="user_reader" label="User reader" />
+        </service>
+        <service id="sylius.import.user_writer" class="%sylius.import.user_writer.class%">
+            <argument type="service" id="sylius.repository.user" />
+            <tag name="sylius.import.writer" writer="user_writer" label="User writer" />
         </service>
         <service id="sylius.export.product_reader" class="%sylius.export.product_reader.class%">
             <argument type="service" id="sylius.repository.product" />
