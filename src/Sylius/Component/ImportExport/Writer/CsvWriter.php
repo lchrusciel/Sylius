@@ -36,6 +36,9 @@ class CsvWriter implements WriterInterface
      */
     private $configuration;
 
+    /**
+     * @param array $items
+     */
     public function write(array $items)
     {
         if (!$this->running) {
@@ -49,7 +52,7 @@ class CsvWriter implements WriterInterface
     }
 
     /**
-     * @param array $configuration
+     * {@inheritdoc}
      */
     public function setConfiguration(array $configuration)
     {

@@ -11,18 +11,18 @@
 
 namespace Sylius\Bundle\CoreBundle\Export\Reader\ORM;
 
+use Sylius\Component\ImportExport\Reader\ReaderInterface;
+
 /**
  * Export reader.
  *
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
-abstract class AbstractDoctrineReader 
+abstract class AbstractDoctrineReader implements ReaderInterface
 {
     private $results;
     private $running = false;
     private $configuration;
-    
-//    public function process();
     
     public function read()
     {
@@ -49,11 +49,11 @@ abstract class AbstractDoctrineReader
         
         return $results;
     }
-    
-    public abstract function process($result);
 
-        public function setConfiguration (array $configuration)
+    public function setConfiguration (array $configuration)
     {
         $this->configuration = $configuration;
-    }
+    }  
+
+    protected abstract function process($result);
 }

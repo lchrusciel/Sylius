@@ -12,11 +12,10 @@
 namespace Sylius\Bundle\ImportExportBundle\Form\Type\Writer;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Writer choice choice type.
+ * Csv writer type
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
@@ -28,13 +27,11 @@ class CsvWriterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', 'text', array(
+            ->add('delimiter', 'text', array(
                 'label'    => 'sylius.form.writer.csv.delimiter',
-                'data'     => ';',
             ))
             ->add('enclosure', 'text', array(
                 'label'    => 'sylius.form.writer.csv.enclosure',
-                'data'     => '"',
             ))
             ->add('add_header', 'checkbox', array(
                 'label'    => 'sylius.form.writer.csv.add_header',
@@ -45,5 +42,13 @@ class CsvWriterType extends AbstractType
                 'required' => true,
             ))
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'sylius_csv_writer';
     }
 }

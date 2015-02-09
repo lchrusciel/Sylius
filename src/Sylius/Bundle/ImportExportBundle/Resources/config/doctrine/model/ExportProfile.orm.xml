@@ -25,6 +25,9 @@
 
         <field name="writer" column="writer" type="string" nullable="false" />
         <field name="writerConfiguration" column="writer_configuration" type="array" />
+
+        <field name="reader" column="reader" type="string" nullable="false" />
+        <field name="readerConfiguration" column="reader_configuration" type="array" />
     </mapped-superclass>
     
 </doctrine-mapping>

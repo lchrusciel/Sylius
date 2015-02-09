@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ImportExportBundle;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ImportExportBundle\DependencyInjection\Compiler\RegisterExportWritersPass;
+use Sylius\Bundle\ImportExportBundle\DependencyInjection\Compiler\RegisterExportReadersPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -45,6 +46,7 @@ class SyliusImportExportBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new RegisterExportWritersPass());
+        $container->addCompilerPass(new RegisterExportReadersPass());
     }
 
     /**
@@ -53,8 +55,10 @@ class SyliusImportExportBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\ImportExport\Model\ExportProfileInterface' => 'sylius.model.export_profile.class',
             'Sylius\Component\ImportExport\Model\ExportJobInterface'     => 'sylius.model.export_job.class',
+            'Sylius\Component\ImportExport\Model\ExportProfileInterface' => 'sylius.model.export_profile.class',
+            'Sylius\Component\ImportExport\Model\ImportJobInterface'     => 'sylius.model.import_job.class',
+            'Sylius\Component\ImportExport\Model\ImportProfileInterface' => 'sylius.model.import_profile.class',
         );
     }
 

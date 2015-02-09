@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\ImportExport\Exporter;
+namespace Sylius\Component\ImportExport;
 
-use Sylius\Component\ImportExport\Model\ExportProfile;
+use Sylius\Component\ImportExport\Model\ExportProfileInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
@@ -20,28 +20,48 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 class Exporter implements ExporterInterface
 {
     /**
-     * Exporter registry
+     * Reader registry
      *
      * @var ServiceRegistryInterface
      */
-    private $registry;
+    private $readerRegistry;
+
+    /**
+     * Writer registry
+     *
+     * @var ServiceRegistryInterface
+     */
+    private $writerRegistry;
 
     /**
      * Constructor
      *
-     * @var ServiceRegistryInterface $registry
+     * @var ServiceRegistryInterface $readerRegistry
+     * @var ServiceRegistryInterface $writerRegistry
      */
-    public function __construct(ServiceRegistryInterface $registry)
+    public function __construct(ServiceRegistryInterface $readerRegistry, ServiceRegistryInterface $writerRegistry)
     {
-        $this->registry = $registry;
+        $this->readerRegistry = $readerRegistry;
+        $this->writerRegistry = $writerRegistry;
     }
 
-    public function export(ExportProfile $exportProfile)
+    public function export(ExportProfileInterface $exportProfile)
     {
-        if (null === $type = $exportProfile->getExporter()) {
-            throw new \InvalidArgumentException('Cannot export data with ExportProfile instance without exporter defined.');
+        if (null === $readerType = $exportProfile->getReader()) {
+            throw new \InvalidArgumentException('Cannot write data with ExportProfile instance without writer defined.');
         }
-        $exporter = $this->registry->get($type);
-        return $exporter->export($exportProfile->getEntity(), $exportProfile->getFields(), $exportProfile->getExporterConfiguration());
+        if (null === $writerType = $exportProfile->getWriter()) {
+            throw new \InvalidArgumentException('Cannot write data with ExportProfile instance without writer defined.');
+        }
+
+        $reader = $this->readerRegistry->get($readerType);
+        $reader->setConfiguration($exportProfile->getReaderConfiguration());
+
+        $writer = $this->writerRegistry->get($writerType);
+        $writer->setConfiguration($exportProfile->getWriterConfiguration());
+
+        foreach ($reader->read() as $data) {
+            $writer->write($data);
+        }
     }
 }

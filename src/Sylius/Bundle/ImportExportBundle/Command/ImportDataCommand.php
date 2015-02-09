@@ -15,33 +15,32 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
-use Sylius\Component\ImportExport\Writer\CsvWriter;
+use Sylius\Component\ImportExport\Reader\CsvReader;
 
 /**
 * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
 */
-class ExportDataToCsvCommand extends ContainerAwareCommand
+class ImportDataCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('sylius:export')
-            ->setDescription('Test command for exporting data to csv file.')
+            ->setName('sylius:import')
+            ->setDescription('Command for importing data based on given data.')
             ->addArgument(
                 'file',
                 InputArgument::REQUIRED,
-                'Path to csv file to be saved.'
+                'Path to file that will be imported.'
             )
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $csvWriter = new CsvWriter();
-        $csvWriter->setConfiguration(array('file' => $input->getArgument('file'), 'delimiter' => '|', 'enclosure' => '*'));
-        $csvWriter->write(array('item1', 'item2, item3, item4'));
-        $csvWriter->write(array('item1.1, item2.1, item3.1'));
-
-        $output->writeln(sprintf('File %s has been created.', $input->getArgument('file')));
+        $filePath = $input->getArgument('file');
+        
+        $reader = new CsvReader();
+        $reader->setConfiguration(array('file' => $filePath, 'delimiter' => ';', 'enclosure' => '*', 'headers' => false));
+        $output->writeln(serialize($reader->read()));
     }
 }

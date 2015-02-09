@@ -18,6 +18,7 @@
 
     <parameters>
         <parameter key="sylius.form.type.export_profile.class">Sylius\Bundle\ImportExportBundle\Form\Type\ExportProfileType</parameter>
+        <parameter key="sylius.form.type.import_profile.class">Sylius\Bundle\ImportExportBundle\Form\Type\ImportProfileType</parameter>
     </parameters>
 
 </container>

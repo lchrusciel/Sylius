@@ -16,6 +16,19 @@ namespace Sylius\Component\ImportExport\Writer;
  */
 interface WriterInterface
 {
+    /**
+     * @param array $items
+     */
     public function write(array $items);
+
+    /**
+     * @param array $configuration
+     */
     public function setConfiguration(array $configuration);
+
+    /**
+    *
+    * @return Type of data
+    */
+    public function getType();
 }

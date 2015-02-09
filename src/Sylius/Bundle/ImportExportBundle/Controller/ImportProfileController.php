@@ -14,9 +14,9 @@ namespace Sylius\Bundle\ImportExportBundle\Controller;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 
-class ShipmentController extends ResourceController
+class ImportProfileController extends ResourceController
 {
-    public function exportAction(Request $request)
+    public function importAction(Request $request)
     {
         
     }

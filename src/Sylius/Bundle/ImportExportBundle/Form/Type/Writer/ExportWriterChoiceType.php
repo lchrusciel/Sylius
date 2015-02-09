@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
-class WriterChoiceType extends AbstractType
+class ExportWriterChoiceType extends AbstractType
 {
     /**
      * Writers

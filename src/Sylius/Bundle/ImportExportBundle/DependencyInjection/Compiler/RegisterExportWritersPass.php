@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Registers all exporters in export profile registry service.
+ * Registers all writers in export profile registry service.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
@@ -28,13 +28,13 @@ class RegisterExportWritersPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius.registry.exporter')) {
+        if (!$container->hasDefinition('sylius.registry.export.writer')) {
             return;
         }
 
-        $registry = $container->getDefinition('sylius.registry.exporter');
+        $registry = $container->getDefinition('sylius.registry.export.writer');
      
-        $writer = array();
+        $writers = array();
 
         foreach ($container->findTaggedServiceIds('sylius.export.writer') as $id => $attributes) {
             if (!isset($attributes[0]['writer']) || !isset($attributes[0]['label'])) {
@@ -42,10 +42,10 @@ class RegisterExportWritersPass implements CompilerPassInterface
             }
 
             $name = $attributes[0]['writer'];
-            $writer[$name] = $attributes[0]['label'];
+            $writers[$name] = $attributes[0]['label'];
 
             $registry->addMethodCall('register', array($name, new Reference($id)));
         }
-        $container->setParameter('sylius.writers', $writer);
+        $container->setParameter('sylius.writers', $writers);
     }
 }

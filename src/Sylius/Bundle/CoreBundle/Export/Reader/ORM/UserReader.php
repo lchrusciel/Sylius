@@ -66,4 +66,12 @@ class UserReader extends AbstractDoctrineReader
         
         return $query;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getType()
+    {
+        return 'user';
+    }
 }

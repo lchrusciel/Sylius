@@ -9,16 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ImportExportBundle\Form\Type;
+namespace Sylius\Component\ImportExport;
 
-use PhpSpec\ObjectBehavior;
+use Sylius\Component\ImportExport\Model\ImportProfileInterface;
 
 /**
- * 
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
-class RuleTypeSpec extends ObjectBehavior
+interface ImporterInterface
 {
-    
+    /**
+     * @param ImportProfileInterface $importer
+     *
+     * @return integer
+     */
+    public function import(ImportProfileInterface $importer);
 }

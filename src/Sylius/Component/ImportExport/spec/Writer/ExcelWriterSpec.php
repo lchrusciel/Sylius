@@ -14,7 +14,6 @@ namespace spec\Sylius\Component\ImportExport\Writer;
 use PhpSpec\ObjectBehavior;
 
 /**
- * 
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class ExcelWriterSpec extends ObjectBehavior
@@ -27,5 +26,10 @@ class ExcelWriterSpec extends ObjectBehavior
     function it_implements_exporter_interface()
     {
         $this->shouldImplement('Sylius\Component\ImportExport\Writer\WriterInterface');
+    }
+
+    function it_has_type()
+    {
+        $this->getType()->shouldReturn('excel');
     }
 }

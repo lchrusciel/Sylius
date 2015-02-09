@@ -3,5 +3,5 @@
 
 sylius:
     import.export:
-        ship:
+        import:
             success: Shipping is completed.
