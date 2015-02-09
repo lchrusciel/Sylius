@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ImportExportBundle\Form\Type\Writer;
+namespace Sylius\Bundle\ImportExportBundle\Form\Type\Reader;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Excel writer type
+ * Reader choice choice type.
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ExcelWriterType extends AbstractType
+class CsvReaderType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -27,12 +27,20 @@ class ExcelWriterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('add_header', 'checkbox', array(
-                'label'    => 'sylius.form.writer.csv.add_header',
+            ->add('delimiter', 'text', array(
+                'label'    => 'sylius.form.reader.csv.delimiter',
+                'data'     => ';',
+            ))
+            ->add('enclosure', 'text', array(
+                'label'    => 'sylius.form.reader.csv.enclosure',
+                'data'     => '"',
+            ))
+            ->add('header', 'checkbox', array(
+                'label'    => 'sylius.form.reader.csv.header',
                 'required' => false,
             ))
             ->add('file', 'text', array(
-                'label'    => 'sylius.form.writer.file',
+                'label'    => 'sylius.form.reader.file',
                 'required' => true,
             ))
         ;
@@ -43,6 +51,6 @@ class ExcelWriterType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_excel_writer';
+        return 'sylius_csv_reader';
     }
 }

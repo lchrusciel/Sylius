@@ -52,10 +52,23 @@ class Importer implements ImporterInterface
      */
     public function import(ImportProfile $importProfile)
     {
-        if (null === $type = $importProfile->getImporter()) {
-            throw new \InvalidArgumentException('Cannot import data with ImportProfile instance without importer defined.');
+        if (null === $readerType = $exportProfile->getReader()) {
+            throw new \InvalidArgumentException('Cannot read data with ImportProfile instance without reader defined.');
         }
-        $importer = $this->readerRegistry->get($type);
-        return $importer->import($importProfile->getEntity(), $importProfile->getFields(), $importProfile->getImporterConfiguration());
+        // if (null === $writerType = $exportProfile->getWriter()) {
+        //     throw new \InvalidArgumentException('Cannot write data with ImportProfile instance without writer defined.');
+        // }
+
+
+        $reader = $this->readerRegistry->get($readerType);
+        $reader->setConfiguration($exportProfile->getReaderConfiguration());
+
+        // $writer = $this->writerRegistry->get($writerType);
+        // $writer->setConfiguration($exportProfile->getWriterConfiguration());
+
+        while (null === ($readedLine = $reader->read())) {
+            var_dump($readedLine);
+            // $writer->write($readedLine);
+        }
     }
 }

@@ -23,20 +23,19 @@ use Sylius\Component\ImportExport\Reader\ReaderInterface;
 use Sylius\Component\ImportExport\Writer\WriterInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chrusciel <lukasz.chrusciel@lakion.com>
  */
-class ExportProfileTypeSpec extends ObjectBehavior
+class ImportProfileTypeSpec extends ObjectBehavior
 {
 
     function let(ServiceRegistryInterface $readerRegistry, ServiceRegistryInterface $writerRegistry)
     {
-        $this->beConstructedWith('Sylius\Component\ImportExport\Model\ExportProfile', array('sylius'), $readerRegistry, $writerRegistry);
+        $this->beConstructedWith('Sylius\Component\ImportExport\Model\ImportProfile', array('sylius'), $readerRegistry, $writerRegistry);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ImportExportBundle\Form\Type\ExportProfileType');
+        $this->shouldHaveType('Sylius\Bundle\ImportExportBundle\Form\Type\ImportProfileType');
     }
 
     function it_should_be_abstract_resource_type_object()
@@ -56,11 +55,11 @@ class ExportProfileTypeSpec extends ObjectBehavior
         $builder->add('name', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('code', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('description', 'textarea', Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->add('reader', 'sylius_export_reader_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->add('writer', 'sylius_export_writer_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->add('reader', 'sylius_import_reader_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
+        // $builder->add('writer', 'sylius_import_writer_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
 
         $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildReaderFormListener'))->shouldBeCalled()->willReturn($builder);
-        $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildWriterFormListener'))->shouldBeCalled()->willReturn($builder);
+        // $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildWriterFormListener'))->shouldBeCalled()->willReturn($builder);
 
         $reader->getType()->willReturn('test_reader');
         $readerRegistry->all()->willReturn(array('test_reader' => $reader));
@@ -68,18 +67,18 @@ class ExportProfileTypeSpec extends ObjectBehavior
         $builder->create('readerConfiguration', 'sylius_test_reader_reader')->willReturn($builder);
         $builder->getForm()->shouldBeCalled()->willReturn(Argument::type('Symfony\Component\Form\Form'));
 
-        $writer->getType()->willReturn('test_writer');
-        $writerRegistry->all()->willReturn(array('test_writer' => $writer));
+        // $writer->getType()->willReturn('test_writer');
+        // $writerRegistry->all()->willReturn(array('test_writer' => $writer));
 
-        $builder->create('writerConfiguration', 'sylius_test_writer_writer')->willReturn($builder);
-        $builder->getForm()->shouldBeCalled()->willReturn(Argument::type('Symfony\Component\Form\Form'));
+        // $builder->create('writerConfiguration', 'sylius_test_writer_writer')->willReturn($builder);
+        // $builder->getForm()->shouldBeCalled()->willReturn(Argument::type('Symfony\Component\Form\Form'));
 
         $prototypes = array(
             'readers' => array(
                 'test_reader' => Argument::type('Symfony\Component\Form\Form'),
             ), 
             'writers' => array(
-                'test_writer' => Argument::type('Symfony\Component\Form\Form'),
+                // 'test_writer' => Argument::type('Symfony\Component\Form\Form'),
             ),
         );
 
@@ -96,20 +95,20 @@ class ExportProfileTypeSpec extends ObjectBehavior
     ) {
        $prototypes = array(
            'reader' => array('table' => $formUser),
-           'writer' => array('csv' => $formCsv),
+           // 'writer' => array('csv' => $formCsv),
        );
 
        $config->getAttribute('prototypes')->willReturn($prototypes);
        $form->getConfig()->willReturn($config);
 
        $formUser->createView($view)->shouldBeCalled();
-       $formCsv->createView($view)->shouldBeCalled();
+       // $formCsv->createView($view)->shouldBeCalled();
 
        $this->buildView($view, $form, array());
 
     }
     function it_has_name()
     {
-       $this->getName()->shouldReturn('sylius_export_profile');
+       $this->getName()->shouldReturn('sylius_import_profile');
     }
 }
