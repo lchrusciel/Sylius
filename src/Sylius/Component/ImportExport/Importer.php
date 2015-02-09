@@ -39,12 +39,11 @@ class Importer implements ImporterInterface
      * @var ServiceRegistryInterface $readerRegistry
      * @var ServiceRegistryInterface $writerRegistry
      */
-    public function __construct(ServiceRegistryInterface $readerRegistry
-        // , ServiceRegistryInterface $writerRegistry
+    public function __construct(ServiceRegistryInterface $readerRegistry, ServiceRegistryInterface $writerRegistry
         )
     {
         $this->readerRegistry = $readerRegistry;
-        // $this->writerRegistry = $writerRegistry;
+        $this->writerRegistry = $writerRegistry;
     }
 
     /**
@@ -55,20 +54,20 @@ class Importer implements ImporterInterface
         if (null === $readerType = $exportProfile->getReader()) {
             throw new \InvalidArgumentException('Cannot read data with ImportProfile instance without reader defined.');
         }
-        // if (null === $writerType = $exportProfile->getWriter()) {
-        //     throw new \InvalidArgumentException('Cannot write data with ImportProfile instance without writer defined.');
-        // }
+        if (null === $writerType = $exportProfile->getWriter()) {
+            throw new \InvalidArgumentException('Cannot write data with ImportProfile instance without writer defined.');
+        }
 
 
         $reader = $this->readerRegistry->get($readerType);
         $reader->setConfiguration($exportProfile->getReaderConfiguration());
 
-        // $writer = $this->writerRegistry->get($writerType);
-        // $writer->setConfiguration($exportProfile->getWriterConfiguration());
+        $writer = $this->writerRegistry->get($writerType);
+        $writer->setConfiguration($exportProfile->getWriterConfiguration());
 
         while (null === ($readedLine = $reader->read())) {
             var_dump($readedLine);
-            // $writer->write($readedLine);
+            $writer->write($readedLine);
         }
     }
 }

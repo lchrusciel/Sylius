@@ -14,6 +14,7 @@ sylius:
         writer:
             name: Writer
             file: File path
+            update: Update existing records?
             csv:
                 delimiter: Delimiter
                 enclosure: Enclosure

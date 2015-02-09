@@ -50,8 +50,8 @@ class ImportProfileType extends AbstractResourceType
     {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->writerRegistry = $writerRegistry;
         $this->readerRegistry = $readerRegistry;
+        $this->writerRegistry = $writerRegistry;
     }
 
     /**
@@ -61,7 +61,7 @@ class ImportProfileType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new BuildReaderFormListener($this->readerRegistry, $builder->getFormFactory()))
-            // ->addEventSubscriber(new BuildWriterFormListener($this->writerRegistry, $builder->getFormFactory()))
+            ->addEventSubscriber(new BuildWriterFormListener($this->writerRegistry, $builder->getFormFactory()))
             ->add('name', 'text', array(
                 'label'    => 'sylius.form.import_profile.name',
                 'required' => true,
@@ -76,6 +76,10 @@ class ImportProfileType extends AbstractResourceType
             ))
             ->add('reader', 'sylius_import_reader_choice', array(
                 'label'    => 'sylius.form.reader.name',
+                'required' => true,
+            ))
+            ->add('writer', 'sylius_import_writer_choice', array(
+                'label'    => 'sylius.form.writer.name',
                 'required' => true,
             ))
         ;
@@ -99,20 +103,19 @@ class ImportProfileType extends AbstractResourceType
             }
         }
 
-        // foreach ($this->writerRegistry->all() as $type => $writer) {
-        //     $formType = sprintf('sylius_%s_writer', $writer->getType());
+        foreach ($this->writerRegistry->all() as $type => $writer) {
+            $formType = sprintf('sylius_%s_writer', $writer->getType());
 
-        //     if (!$formType) {
-        //         continue;
-        //     }
+            if (!$formType) {
+                continue;
+            }
 
-        //     try {
-        //         $prototypes['writer'][$type] = $builder->create('writerConfiguration', $formType)->getForm();
-        //     } catch (\InvalidArgumentException $e) {
-        //         continue;
-        //     }
-        // }
-
+            try {
+                $prototypes['writers'][$type] = $builder->create('writerConfiguration', $formType)->getForm();
+            } catch (\InvalidArgumentException $e) {
+                continue;
+            }
+        }
         $builder->setAttribute('prototypes', $prototypes);
     }
 

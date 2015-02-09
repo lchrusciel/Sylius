@@ -56,10 +56,10 @@ class ImportProfileTypeSpec extends ObjectBehavior
         $builder->add('code', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('description', 'textarea', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('reader', 'sylius_import_reader_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
-        // $builder->add('writer', 'sylius_import_writer_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->add('writer', 'sylius_import_writer_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
 
         $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildReaderFormListener'))->shouldBeCalled()->willReturn($builder);
-        // $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildWriterFormListener'))->shouldBeCalled()->willReturn($builder);
+        $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ImportExportBundle\Form\EventListener\BuildWriterFormListener'))->shouldBeCalled()->willReturn($builder);
 
         $reader->getType()->willReturn('test_reader');
         $readerRegistry->all()->willReturn(array('test_reader' => $reader));
@@ -67,18 +67,18 @@ class ImportProfileTypeSpec extends ObjectBehavior
         $builder->create('readerConfiguration', 'sylius_test_reader_reader')->willReturn($builder);
         $builder->getForm()->shouldBeCalled()->willReturn(Argument::type('Symfony\Component\Form\Form'));
 
-        // $writer->getType()->willReturn('test_writer');
-        // $writerRegistry->all()->willReturn(array('test_writer' => $writer));
+        $writer->getType()->willReturn('test_writer');
+        $writerRegistry->all()->willReturn(array('test_writer' => $writer));
 
-        // $builder->create('writerConfiguration', 'sylius_test_writer_writer')->willReturn($builder);
-        // $builder->getForm()->shouldBeCalled()->willReturn(Argument::type('Symfony\Component\Form\Form'));
+        $builder->create('writerConfiguration', 'sylius_test_writer_writer')->willReturn($builder);
+        $builder->getForm()->shouldBeCalled()->willReturn(Argument::type('Symfony\Component\Form\Form'));
 
         $prototypes = array(
             'readers' => array(
                 'test_reader' => Argument::type('Symfony\Component\Form\Form'),
             ), 
             'writers' => array(
-                // 'test_writer' => Argument::type('Symfony\Component\Form\Form'),
+                'test_writer' => Argument::type('Symfony\Component\Form\Form'),
             ),
         );
 
@@ -95,7 +95,7 @@ class ImportProfileTypeSpec extends ObjectBehavior
     ) {
        $prototypes = array(
            'reader' => array('table' => $formUser),
-           // 'writer' => array('csv' => $formCsv),
+           'writer' => array('csv' => $formCsv),
        );
 
        $config->getAttribute('prototypes')->willReturn($prototypes);
