@@ -18,9 +18,9 @@ class ImportProfile extends Profile implements ExportProfileInterface
 {
     function __construct() 
     {
+        $this->reader = 'csv_reader';
+        $this->readerConfiguration = array();
         $this->writer = '';
         $this->writerConfiguration = array();
-        $this->reader = '';
-        $this->readerConfiguration = array();
     }
 }

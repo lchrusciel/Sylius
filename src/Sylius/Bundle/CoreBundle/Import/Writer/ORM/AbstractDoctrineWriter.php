@@ -20,34 +20,19 @@ use Sylius\Component\ImportExport\Writer\WriterInterface;
  */
 abstract class AbstractDoctrineWriter implements WriterInterface
 {
-    private $results;
-    private $running = false;
     private $configuration;
     
-    public function write()
-    {
-        if (!$this->running)
-        {
-            $this->running =true;
-            $this->results = $this->getQuery()->execute();
-            $this->results = new \ArrayIterator($this->results);
-            $batchSize = $this->configuration['batch_size'];
+    public function write(array $items)
+    {   
+        foreach ($items as $item)
+        {            
+            $item = $this->process($item);
         }
         
-        $results = array();
+        $em = $this->getDoctrine()->getManager();
 
-        for ($i=0; $i<$batchSize; $i++)
-        {
-            if ($result = $this->results->current())
-            {
-                $this->results->next();
-            }
-            
-            $result = $this->process($result);
-            $results[] = $result;
-        }
-        
-        return $results;
+        $em->persist();
+        $em->flush();
     }
 
     public function setConfiguration (array $configuration)
