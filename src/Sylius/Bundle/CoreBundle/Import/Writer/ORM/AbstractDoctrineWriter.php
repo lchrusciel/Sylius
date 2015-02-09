@@ -23,8 +23,7 @@ abstract class AbstractDoctrineWriter implements WriterInterface
     private $configuration;
     
     public function write(array $items)
-    {    
-        
+    {   
         foreach ($items as $item)
         {            
             $item = $this->process($item);

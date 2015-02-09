@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\ImportExport;
 
-use Sylius\Component\ImportExport\Model\ImportProfile;
+use Sylius\Component\ImportExport\Model\ImportProfileInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
@@ -39,8 +39,7 @@ class Importer implements ImporterInterface
      * @var ServiceRegistryInterface $readerRegistry
      * @var ServiceRegistryInterface $writerRegistry
      */
-    public function __construct(ServiceRegistryInterface $readerRegistry, ServiceRegistryInterface $writerRegistry
-        )
+    public function __construct(ServiceRegistryInterface $readerRegistry, ServiceRegistryInterface $writerRegistry)
     {
         $this->readerRegistry = $readerRegistry;
         $this->writerRegistry = $writerRegistry;
@@ -49,22 +48,23 @@ class Importer implements ImporterInterface
     /**
      * {@inheritdoc}
      */
-    public function import(ImportProfile $importProfile)
+    public function import(ImportProfileInterface $importProfile)
     {
-        if (null === $readerType = $exportProfile->getReader()) {
+        if (null === $readerType = $importProfile->getReader()) {
             throw new \InvalidArgumentException('Cannot read data with ImportProfile instance without reader defined.');
         }
-        if (null === $writerType = $exportProfile->getWriter()) {
+        if (null === $writerType = $importProfile->getWriter()) {
             throw new \InvalidArgumentException('Cannot write data with ImportProfile instance without writer defined.');
         }
 
-
         $reader = $this->readerRegistry->get($readerType);
-        $reader->setConfiguration($exportProfile->getReaderConfiguration());
+        $reader->setConfiguration($importProfile->getReaderConfiguration());
 
         $writer = $this->writerRegistry->get($writerType);
-        $writer->setConfiguration($exportProfile->getWriterConfiguration());
+        $writer->setConfiguration($importProfile->getWriterConfiguration());
 
+        var_dump($reader);
+        exit();
         while (null === ($readedLine = $reader->read())) {
             var_dump($readedLine);
             $writer->write($readedLine);

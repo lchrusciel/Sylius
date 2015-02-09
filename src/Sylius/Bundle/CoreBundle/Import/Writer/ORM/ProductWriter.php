@@ -31,7 +31,7 @@ class ProductWriter extends AbstractDoctrineWriter
     {
         // $product = $this->productRepository->createNew();
 
-        var_dump($data);
+        print_r($data);
 
         // $shippingAddress = $user->setShippingAddress();
         // $billingAddress = $user->setBillingAddress();

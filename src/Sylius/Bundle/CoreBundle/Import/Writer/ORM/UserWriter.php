@@ -55,14 +55,6 @@ class UserWriter extends AbstractDoctrineWriter
         $user->setCurrency($data['currency']);
         $user->setCreatedAt(new \DateTime($data['created_at']));
     }
-    
-    public function getQuery()
-    {
-        $query = $this->userRepository->createQueryBuilder('u')
-            ->getQuery();
-        
-        return $query;
-    }
 
     /**
      * {@inheritdoc}
