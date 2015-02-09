@@ -2,4 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-
+    export_profile:
+        code:
+            in_use: This code is already in use.

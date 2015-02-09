@@ -29,11 +29,9 @@ class CsvWriterType extends AbstractType
         $builder
             ->add('delimiter', 'text', array(
                 'label'    => 'sylius.form.writer.csv.delimiter',
-                'data'     => ';',
             ))
             ->add('enclosure', 'text', array(
                 'label'    => 'sylius.form.writer.csv.enclosure',
-                'data'     => '"',
             ))
             ->add('add_header', 'checkbox', array(
                 'label'    => 'sylius.form.writer.csv.add_header',

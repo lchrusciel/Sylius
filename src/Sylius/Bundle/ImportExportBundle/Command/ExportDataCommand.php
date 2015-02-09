@@ -42,6 +42,6 @@ class ExportDataCommand extends ContainerAwareCommand
             throw new \InvalidArgumentException('There is no export profile with given code.');
         }
 
-        $this->getContainer()->get('sylius.import_export.exporter')->export($exportProfile);
+        $this->getContainer()->get('sylius.import_export.exporter')->export($exportProfile[0]);
     }
 }

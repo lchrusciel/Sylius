@@ -60,6 +60,8 @@ class Exporter implements ExporterInterface
         $writer = $this->writerRegistry->get($writerType);
         $writer->setConfiguration($exportProfile->getWriterConfiguration());
 
-        $writer->write($reader->read());
+        foreach ($reader->read() as $data) {
+            $writer->write($data);
+        }
     }
 }

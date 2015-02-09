@@ -258,10 +258,15 @@ class BackendMenuBuilder extends MenuBuilder
             ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.import_export', $section)))
         ;
 
+
         $child->addChild('export', array(
             'route' => 'sylius_backend_export_profile_index',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-shopping-cart'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.export', $section)));
+        $child->addChild('import', array(
+            'route' => 'sylius_backend_import_profile_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-shopping-cart'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.import', $section)));
     }
 
     /**

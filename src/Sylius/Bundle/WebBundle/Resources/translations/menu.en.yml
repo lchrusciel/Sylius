@@ -55,6 +55,7 @@ sylius:
                 general_settings: General settings
                 groups: Groups
                 homepage: Back to frontend
+                import: Import
                 import_export: Import/Export
                 locales: Locales
                 new_order: Add new order
