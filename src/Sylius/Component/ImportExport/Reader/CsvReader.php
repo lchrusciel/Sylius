@@ -43,7 +43,6 @@ class CsvReader implements ReaderInterface
      */
     public function read()
     {
-        var_dump('$reader');
         if (!$this->running) {
             $this->csvReader = new Reader($this->configuration['file'], 'r', false);
             $this->csvReader->setDelimiter($this->configuration['delimiter']);

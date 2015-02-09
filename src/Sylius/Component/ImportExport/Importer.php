@@ -63,10 +63,7 @@ class Importer implements ImporterInterface
         $writer = $this->writerRegistry->get($writerType);
         $writer->setConfiguration($importProfile->getWriterConfiguration());
 
-        var_dump($reader);
-        exit();
-        while (null === ($readedLine = $reader->read())) {
-            var_dump($readedLine);
+        while (null !== ($readedLine = $reader->read())) {
             $writer->write($readedLine);
         }
     }
