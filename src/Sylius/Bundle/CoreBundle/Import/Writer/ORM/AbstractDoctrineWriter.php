@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Export\Reader\ORM;
+namespace Sylius\Bundle\CoreBundle\Import\Writer\ORM;
 
-use Sylius\Component\ImportExport\Reader\ReaderInterface;
+use Sylius\Component\ImportExport\Writer\WriterInterface;
 
 /**
  * Export reader.
  *
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
-abstract class AbstractDoctrineReader implements ReaderInterface
+abstract class AbstractDoctrineWriter implements WriterInterface
 {
     private $results;
     private $running = false;
     private $configuration;
     
-    public function read()
+    public function write()
     {
         if (!$this->running)
         {

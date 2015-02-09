@@ -29,7 +29,7 @@ class ProductReaderType extends AbstractType
         $builder
             ->add('batch_size', 'number', array(
                 'label'    => 'sylius.form.reader.batch_size',
-                'data'     => '100',
+                'empty_data'     => '100',
             ))
         ;
     }
