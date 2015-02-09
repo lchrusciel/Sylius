@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Import\Writer\ORM;
 
 use Sylius\Component\ImportExport\Writer\WriterInterface;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Export reader.
@@ -21,18 +22,25 @@ use Sylius\Component\ImportExport\Writer\WriterInterface;
 abstract class AbstractDoctrineWriter implements WriterInterface
 {
     private $configuration;
+    private $em;
+    
+    public function __construct(EntityManager $em) {
+        $this->em = $em;
+    }
     
     public function write(array $items)
     {   
+//        var_dump($items);
+        
         foreach ($items as $item)
-        {            
-            $item = $this->process($item);
+        {           
+            var_dump($item);
+            $newObject = $this->process($item);
+            $this->em->persist($newObject);
         }
         
-        $em = $this->getDoctrine()->getManager();
-
-        $em->persist();
-        $em->flush();
+//        $this->em->persist();
+        $this->em->flush();
     }
 
     public function setConfiguration (array $configuration)

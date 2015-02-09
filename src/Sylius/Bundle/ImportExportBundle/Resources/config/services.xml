@@ -95,8 +95,8 @@
         <!-- Import Config -->
         
         <service id="sylius.import_export.importer" class="%sylius.import_export.importer.class%">
-            <argument type="service" id="sylius.registry.export.reader" />
-            <!-- <argument type="service" id="sylius.registry.export.writer" /> -->
+            <argument type="service" id="sylius.registry.import.reader" />
+            <argument type="service" id="sylius.registry.import.writer" />
         </service>
         
         <service id="sylius.form.type.import_writer_choice" class="%sylius.form.type.import_writer_choice.class%">

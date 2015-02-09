@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Import\Writer\ORM;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Product writer.
@@ -22,8 +23,9 @@ class ProductWriter extends AbstractDoctrineWriter
 {
     private $productRepository;
     
-    public function __construct(RepositoryInterface $productRepository)
+    public function __construct(RepositoryInterface $productRepository, EntityManager $em)
     {
+        parent::__construct($em);
         $this->productRepository = $productRepository;
     }
     
@@ -31,7 +33,7 @@ class ProductWriter extends AbstractDoctrineWriter
     {
         // $product = $this->productRepository->createNew();
 
-        var_dump($data);
+        print_r($data);
 
         // $shippingAddress = $user->setShippingAddress();
         // $billingAddress = $user->setBillingAddress();

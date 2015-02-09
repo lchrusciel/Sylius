@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Import\Writer\ORM;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Doctrine\ORM\EntityManager;
 
 /**
  * User writer.
@@ -22,38 +23,41 @@ class UserWriter extends AbstractDoctrineWriter
 {
     private $userRepository;
     
-    public function __construct(RepositoryInterface $userRepository)
+    public function __construct(RepositoryInterface $userRepository, EntityManager $em)
     {
+        parent::__construct($em);
         $this->userRepository = $userRepository;
     }
     
     public function process($data) 
     {
         $user = $this->userRepository->createNew();
-        $shippingAddress = $user->setShippingAddress();
-        $billingAddress = $user->setBillingAddress();
+        $shippingAddress = $user->getShippingAddress();
+        $billingAddress = $user->getBillingAddress();
         
-        $user->setFirstName($data['first_name']);
-        $user->setLastName($data['last_name']);
-        $user->setUsername($data['username']);
-        $user->setEmail($data['email']);
-        $shippingAddress ? $shippingAddress->setCompany($data['shipping_address_company']) : null;
-        $shippingAddress ? $shippingAddress->setCountry($data['shipping_address_country']) : null;
-        $shippingAddress ? $shippingAddress->setProvince($data['shipping_adress_province']) : null;
-        $shippingAddress ? $shippingAddress->setCity($data['shipping_address_city']) : null;
-        $shippingAddress ? $shippingAddress->setStreet($data['shipping_address_street']) : null;
-        $shippingAddress ? $shippingAddress->setPostcode($data['shipping_address_postcode']) : null;
-        $shippingAddress ? $shippingAddress->setPhoneNumber($data['shipping_adress_phone_number']) : null;
-        $billingAddress ? $billingAddress->setCompany($data['billing_address_company']) : null;
-        $billingAddress ? $billingAddress->setCountry($data['billing_address_country']) : null;
-        $billingAddress ? $billingAddress->setProvince($data['billing_adress_province']) : null;
-        $billingAddress ? $billingAddress->setCity($data['billing_address_city']) : null;
-        $billingAddress ? $billingAddress->setStreet($data['billing_address_street']) : null;
-        $billingAddress ? $billingAddress->setPostcode($data['billing_address_postcode']) : null;
-        $billingAddress ? $billingAddress->setPhoneNumber($data['billing_adress_phone_number']) : null;
-        $user->setEnabled($data['enabled']);
-        $user->setCurrency($data['currency']);
-        $user->setCreatedAt(new \DateTime($data['created_at']));
+        $user->setFirstName($data['1']);
+        $user->setLastName($data['2']);
+        $user->setUsername($data['3']);
+        $user->setEmail($data['4']);
+        $shippingAddress ? $shippingAddress->setCompany($data['5']) : null;
+        $shippingAddress ? $shippingAddress->setCountry($data['6']) : null;
+        $shippingAddress ? $shippingAddress->setProvince($data['7']) : null;
+        $shippingAddress ? $shippingAddress->setCity($data['8']) : null;
+        $shippingAddress ? $shippingAddress->setStreet($data['9']) : null;
+        $shippingAddress ? $shippingAddress->setPostcode($data['10']) : null;
+        $shippingAddress ? $shippingAddress->setPhoneNumber($data['11']) : null;
+        $billingAddress ? $billingAddress->setCompany($data['12']) : null;
+        $billingAddress ? $billingAddress->setCountry($data['13']) : null;
+        $billingAddress ? $billingAddress->setProvince($data['14']) : null;
+        $billingAddress ? $billingAddress->setCity($data['15']) : null;
+        $billingAddress ? $billingAddress->setStreet($data['16']) : null;
+        $billingAddress ? $billingAddress->setPostcode($data['17']) : null;
+        $billingAddress ? $billingAddress->setPhoneNumber($data['18']) : null;
+        $user->setEnabled($data['19']);
+        $user->setCurrency($data['20']);
+        $user->setCreatedAt(new \DateTime($data['21']));
+        
+        return $user;
     }
 
     /**

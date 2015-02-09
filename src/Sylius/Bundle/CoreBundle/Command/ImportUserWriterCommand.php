@@ -37,7 +37,7 @@ class ImportUserWriterCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $importProfile = $this->getContainer()->get('sylius.repository.import_profile')->findOneByCode($input->getArgument('code'));
-        $userWriter = $this->getContainer()->get('sylius.repository.user_writer');
+        $userWriter = $this->getContainer()->get('sylius.repository.user');
         
         if ($importProfile === null) {
             throw new \InvalidArgumentException('There is no export profile with given code.');
