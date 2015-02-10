@@ -37,7 +37,7 @@ class CsvReaderTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
         $builder
-            ->add('header', 'checkbox', Argument::type('array'))
+            ->add('batch', 'number', Argument::type('array'))
             ->willReturn($builder)
         ;
         $builder

@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Import\Writer\ORM;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Doctrine\ORM\EntityManager;
+use Sylius\Component\Product\Model\Product;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Product writer.
@@ -54,33 +55,50 @@ class ProductWriter extends AbstractDoctrineWriter
     
     public function process($data) 
     {
-        $product = $this->productRepository->createNew();
+        $product = $this->productRepository->find($data['id']);
 
-        $archetype = $this->archetypeRepository->findOneByCode($data['archetype']);
-        $taxCategory = $this->taxCategoryRepository->findOneByName($data['tax_category']);
-        // $shippingCategory = $this->shippingCategoryRepository->findOneByName($data['shipping_category']);
+        if (null === $product) {
+            $product = $this->productRepository->createNew();
+        }
 
-        $product->setName($data['name']);
-        $product->setPrice($data['price']);
-        $product->setDescription($data['description']);
-        $product->setShortDescription($data['short_description']);
-        $product->setArchetype($archetype);
-        $product->setTaxCategory($taxCategory);
-        // $product->setShippingCategory($shippingCategory);
-        $product->setAvailableOn(new \DateTime($data['is_available_on']));
-        $product->setMetaKeyWords($data['meta_keywords']);
-        $product->setMetaDescription($data['meta_description']);
-        $product->setCreatedAt(new \DateTime($data['createdAt']));
+        if (!isset($data['name'])) {
+            $product->setName($data['name']);
+        }
+        if (!isset($data['price'])) {
+            $product->setPrice($data['price']);
+        }
+        if (!isset($data['description'])) {
+            $product->setDescription($data['description']);
+        }
+        if (!isset($data['short_description'])) {
+            $product->setShortDescription($data['short_description']);
+        }
+        if (!empty($data['archetype'])) {
+            $archetype = $this->archetypeRepository->findOneBy(array('code' => $data['archetype']));
+            $product->setArchetype($archetype);
+        }
+        if (!empty($data['tax_category'])) {
+            $taxCategory = $this->taxCategoryRepository->findOneBy(array('name' => $data['tax_category']));
+            $product->setTaxCategory($taxCategory);
+        }
+        if (!empty($data['shipping_category'])) {
+            $shippingCategory = $this->shippingCategoryRepository->find($data['shipping_category']);
+            $product->setShippingCategory($shippingCategory);
+        }
+        if (!isset($data['is_available_on'])) {
+            $product->setAvailableOn(new \DateTime($data['is_available_on']));
+        }
+        if (!isset($data['meta_keywords'])) {
+            $product->setMetaKeyWords($data['meta_keywords']);
+        }
+        if (!isset($data['meta_description'])) {
+            $product->setMetaDescription($data['meta_description']);
+        }
+        if (!isset($data['createdAt'])) {
+            $product->setCreatedAt(new \DateTime($data['createdAt']));
+        }
 
         return $product;
-    }
-    
-    public function getQuery()
-    {
-        $query = $this->productRepository->createQueryBuilder('u')
-            ->getQuery();
-        
-        return $query;
     }
 
     /**

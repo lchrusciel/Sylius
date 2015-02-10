@@ -46,7 +46,7 @@ class ExporterSpec extends ObjectBehavior
 
         $readerRegistry->get('doctrine')->willReturn($reader);
         $reader->setConfiguration(array())->shouldBeCalled();
-        $reader->read()->willReturn(array('readData'));
+        $reader->read()->willReturn(array(array('readData')));
 
         $writerRegistry->get('csv')->willReturn($writer);
         $writer->setConfiguration(array())->shouldBeCalled();
