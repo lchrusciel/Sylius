@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Import\Writer\ORM;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Product writer.
@@ -36,13 +37,15 @@ class ProductWriter extends AbstractDoctrineWriter
      * @var RepositoryInterface
      */
     private $shippingCategoryRepository;
-    
+        
     public function __construct(
         RepositoryInterface $productRepository,
         RepositoryInterface $archetypeRepository,
         RepositoryInterface $taxCategoryRepository,
-        RepositoryInterface $shippingCategoryRepository)
+        RepositoryInterface $shippingCategoryRepository, 
+        EntityManager $em)
     {
+        parent::__construct($em);
         $this->productRepository = $productRepository;
         $this->archetypeRepository = $archetypeRepository;
         $this->taxCategoryRepository = $taxCategoryRepository;
@@ -55,7 +58,7 @@ class ProductWriter extends AbstractDoctrineWriter
 
         $archetype = $this->archetypeRepository->findOneByCode($data['archetype']);
         $taxCategory = $this->taxCategoryRepository->findOneByName($data['tax_category']);
-        $shippingCategory = $this->shippingCategoryRepository->findOneByName($data['shipping_category']);
+        // $shippingCategory = $this->shippingCategoryRepository->findOneByName($data['shipping_category']);
 
         $product->setName($data['name']);
         $product->setPrice($data['price']);
@@ -63,14 +66,11 @@ class ProductWriter extends AbstractDoctrineWriter
         $product->setShortDescription($data['short_description']);
         $product->setArchetype($archetype);
         $product->setTaxCategory($taxCategory);
-        $product->setShippingCategory($shippingCategory);
-        $product->setIsAvailableOn($data['is_available_on']);
+        // $product->setShippingCategory($shippingCategory);
+        $product->setAvailableOn(new \DateTime($data['is_available_on']));
         $product->setMetaKeyWords($data['meta_keywords']);
         $product->setMetaDescription($data['meta_description']);
         $product->setCreatedAt(new \DateTime($data['createdAt']));
-
-        var_dump($product);
-        exit;
 
         return $product;
     }

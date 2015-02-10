@@ -50,7 +50,12 @@ class CsvReader implements ReaderInterface
             $this->running = true;
         }
         
-        return $this->csvReader->getRow();
+        for ($i=0; $i < $this->configuration['batch']; $i++)
+        {
+            $rows[] = $this->csvReader->getRow();
+        }
+        
+        return $rows;
     }
 
     /**
