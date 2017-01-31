@@ -49,7 +49,7 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.extension.type.api_order_item" class="Sylius\Bundle\ApiBundle\Form\Type\OrderItemType">
+        <service id="sylius.form.type.api_order_item" class="Sylius\Bundle\ApiBundle\Form\Type\OrderItemType">
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="form.type" />
         </service>
