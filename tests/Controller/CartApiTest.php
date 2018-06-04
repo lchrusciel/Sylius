@@ -302,6 +302,49 @@ EOT;
     /**
      * @test
      */
+    public function it_adds_multiple_items_to_the_cart_and_remove()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $carts = $this->loadFixturesFromFile('resources/cart.yml');
+
+        /** @var OrderInterface $cart */
+        $cart = $carts['order_001'];
+
+        $data =
+<<<EOT
+        {
+            "variant": "MUG_SW",
+            "quantity": 1
+        }
+EOT;
+        $this->client->request('POST', $this->getCartItemListUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $data =
+<<<EOT
+        {
+            "variant": "HARD_AVAILABLE_MUG",
+            "quantity": 2
+        }
+EOT;
+        $this->client->request('POST', $this->getCartItemListUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
+
+
+        $response = $this->client->getResponse();
+        $rawResponse = json_decode($response->getContent(), true);
+
+        $cartItem = $rawResponse['id'];
+
+        $this->client->request('DELETE', $this->getCartItemListUrl($cart) . $cartItem, [], [], static::$authorizedHeaderWithContentType);
+
+        $this->client->request('GET', $this->getCartUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'cart/show_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
     public function it_does_not_allow_to_add_item_with_negative_quantity()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
