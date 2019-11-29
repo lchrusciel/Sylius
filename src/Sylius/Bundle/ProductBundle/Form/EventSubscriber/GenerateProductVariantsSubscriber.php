@@ -56,7 +56,7 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
         try {
             $this->generator->generate($product);
         } catch (VariantWithNoOptionsValuesException $exception) {
-            $this->session->getFlashBag()->add('error', $exception->getMessage());
+            $this->session->getFlashBag()->add('error', 'sylius.product_variant.cannot_generate_variants');
         }
     }
 }

@@ -72,7 +72,7 @@ class ProductTaxonController extends ResourceController
                 try {
                     $this->updatePositions($position, $id);
                 } catch (\InvalidArgumentException $exception) {
-                    $session->getFlashBag()->add('error', $exception->getMessage());
+                    $session->getFlashBag()->add('error', 'Error');
 
                     return $this->redirectHandler->redirectToReferer($configuration);
                 }
