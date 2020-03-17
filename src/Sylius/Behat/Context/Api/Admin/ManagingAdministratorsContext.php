@@ -249,7 +249,7 @@ final class ManagingAdministratorsContext implements Context
         );
         Assert::same(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Cannot remove currently logged in user.'
+            'Cannot remove currently logged in user. Current response:' . $this->client->getLastResponse()->getContent()
         );
     }
 }
