@@ -26,6 +26,7 @@
         "sylius/core-bundle": "^1.7"
     },
     "require-dev": {
+        "symfony/flex": "^1.2",
         "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^7.0"
     },
@@ -55,6 +56,11 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.7-dev"
+        },
+        "symfony": {
+            "id": "01E5VY74WZV6V2HZ43CAZYMKGG",
+            "allow-contrib": true,
+            "require": "^4.4"
         }
     }
 }
