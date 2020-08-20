@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Context\Ui;
+namespace Sylius\Behat\Context;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;

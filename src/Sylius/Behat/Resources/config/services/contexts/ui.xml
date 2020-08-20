@@ -473,7 +473,7 @@
             <argument type="service" id="sylius.behat.current_page_resolver" />
         </service>
 
-        <service id="sylius.behat.context.ui.email" class="Sylius\Behat\Context\Ui\EmailContext">
+        <service id="sylius.behat.context.email" class="Sylius\Behat\Context\EmailContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.email_checker" />
             <argument type="service" id="translator" />
