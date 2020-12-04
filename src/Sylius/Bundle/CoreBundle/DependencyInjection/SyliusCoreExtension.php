@@ -54,6 +54,8 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
         $loader->load('services.xml');
 
+        $container->setParameter('sylius_core.prepend_doctrine_migrations', $config['prepend_doctrine_migrations']);
+
         $env = $container->getParameter('kernel.environment');
         if ('test' === $env || 'test_cached' === $env) {
             $loader->load('test_services.xml');
