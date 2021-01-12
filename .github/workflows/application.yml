@@ -236,7 +236,7 @@ jobs:
 
         name: "Test JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }})"
 
-        timeout-minutes: 45
+        timeout-minutes: 120
 
         strategy:
             fail-fast: false
