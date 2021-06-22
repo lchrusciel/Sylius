@@ -6,16 +6,16 @@
         {
             "@id": "\/api\/v2\/shop\/shipping-methods\/UPS",
             "@type": "ShippingMethod",
-            "id": @integer@,
+            "id": "@integer@",
             "code": "UPS",
             "position": 0,
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/shop\/shipping-method-translations\/@integer@",
                     "@type": "ShippingMethodTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "UPS",
-                    "description": @string@
+                    "description": "@string@"
                 }
             },
             "name": "UPS",
@@ -24,16 +24,16 @@
         {
             "@id": "\/api\/v2\/shop\/shipping-methods\/DHL",
             "@type": "ShippingMethod",
-            "id": @integer@,
+            "id": "@integer@",
             "code": "DHL",
             "position": 1,
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/shop\/shipping-method-translations\/@integer@",
                     "@type": "ShippingMethodTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "DHL",
-                    "description": @string@
+                    "description": "@string@"
                 }
             },
             "name": "DHL",
