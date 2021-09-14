@@ -79,7 +79,7 @@
             </itemOperation>
 
             <itemOperation name="admin_cancel">
-                <attribute name="method">PATCH</attribute>
+                <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/orders/{tokenValue}/cancel</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface:cancel</attribute>
@@ -256,7 +256,7 @@
             </itemOperation>
 
             <itemOperation name="shop_complete">
-                <attribute name="method">PATCH</attribute>
+                <attribute name="method">POST</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/complete</attribute>
                 <attribute name="validation_groups">
                     <attribute>sylius</attribute>

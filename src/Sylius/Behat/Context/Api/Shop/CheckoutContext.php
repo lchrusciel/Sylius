@@ -1412,7 +1412,7 @@ final class CheckoutContext implements Context
             'shop',
             'orders',
             $this->sharedStorage->get('cart_token'),
-            HTTPRequest::METHOD_PATCH,
+            HTTPRequest::METHOD_POST,
             'complete'
         );
 

@@ -53,7 +53,7 @@
             </itemOperation>
 
             <itemOperation name="admin_ship">
-                <attribute name="method">PATCH</attribute>
+                <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/shipments/{id}/ship</attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\ShipShipment</attribute>

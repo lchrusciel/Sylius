@@ -53,7 +53,7 @@
             </itemOperation>
 
             <itemOperation name="admin_complete">
-                <attribute name="method">PATCH</attribute>
+                <attribute name="method">POST</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="path">/admin/payments/{id}/complete</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicatorInterface:complete</attribute>

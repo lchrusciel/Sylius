@@ -85,7 +85,7 @@
             </itemOperation>
 
             <itemOperation name="admin_accept">
-                <attribute name="method">PATCH</attribute>
+                <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/product-reviews/{id}/accept</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface:accept</attribute>
@@ -98,7 +98,7 @@
             </itemOperation>
 
             <itemOperation name="admin_reject">
-                <attribute name="method">PATCH</attribute>
+                <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/product-reviews/{id}/reject</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface:reject</attribute>

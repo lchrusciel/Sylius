@@ -136,7 +136,7 @@ final class Request implements RequestInterface
 
     public static function transition(?string $section, string $resource, string $id, string $transition): RequestInterface
     {
-        return self::customItemAction($section, $resource, $id, HttpRequest::METHOD_PATCH, $transition);
+        return self::customItemAction($section, $resource, $id, HttpRequest::METHOD_POST, $transition);
     }
 
     public static function customItemAction(?string $section, string $resource, string $id, string $type, string $action): RequestInterface
