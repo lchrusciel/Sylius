@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Symfony\Component\VarDumper\VarDumper;
 use Webmozart\Assert\Assert;
 
 final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionCommand
@@ -82,7 +83,10 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
 
 //        $splitPromotion = $this->proportionalDistributor->distribute($itemsTotals, $promotionAmount);
 
-        $splitPromotion = $this->minimumPriceDistributor->distributeWithMinimumPrice($promotionAmount, $itemsTotals, $minimumPrices);
+        $splitPromotion = $this->minimumPriceDistributor->distribute($subject->getItems()->toArray(), $promotionAmount, $subject->getChannel());
+
+        VarDumper::dump($promotionAmount);
+        VarDumper::dump($splitPromotion);
 
         if (sizeof($minimumPrices) === 4) {
             $debug = true;
