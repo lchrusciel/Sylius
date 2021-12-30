@@ -65,6 +65,29 @@ final class SyliusOrderExtensionTest extends AbstractExtensionTestCase
         );
     }
 
+    /**
+     * @test
+     */
+    public function it_does_not_autoconfigure_order_processors_if_they_are_already_tagged(): void
+    {
+        $this->container->setDefinition(
+            'acme.processor_autoconfigured',
+            (new Definition())
+                ->setClass($this->getMockClass(OrderProcessorInterface::class))
+                ->addTag('sylius.order_processor', ['priority' => 10])
+                ->setAutoconfigured(true)
+        );
+
+        $this->load();
+        $this->compile();
+
+        $definition = $this->container->findDefinition('acme.processor_autoconfigured');
+
+        $tags = $definition->getTag('sylius.order_processor');
+
+        $this->assertCount(1, $tags);
+    }
+
     protected function getContainerExtensions(): array
     {
         return [new SyliusOrderExtension()];
