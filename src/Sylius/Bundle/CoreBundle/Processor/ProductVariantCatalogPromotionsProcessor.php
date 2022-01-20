@@ -14,45 +14,43 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Processor;
 
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
+use Sylius\Bundle\CoreBundle\Provider\ForTaxonsScopeVariantsProvider;
+use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 
 final class ProductVariantCatalogPromotionsProcessor implements ProductVariantCatalogPromotionsProcessorInterface
 {
-    private CatalogPromotionClearerInterface $catalogPromotionClearer;
-
-    private CatalogPromotionApplicatorInterface $catalogPromotionApplicator;
-
     public function __construct(
-        CatalogPromotionClearerInterface $catalogPromotionClearer,
-        CatalogPromotionApplicatorInterface $catalogPromotionApplicator
+        private CatalogPromotionClearerInterface $catalogPromotionClearer,
+        private CatalogPromotionApplicatorInterface $catalogPromotionApplicator
     ) {
-        $this->catalogPromotionClearer = $catalogPromotionClearer;
-        $this->catalogPromotionApplicator = $catalogPromotionApplicator;
     }
 
-    public function process(ProductVariantInterface $variant): void
+    public function process(ProductVariantInterface $variant, array $catalogPromotions): void
     {
-        foreach ($variant->getChannelPricings() as $channelPricing) {
-            $this->reapplyOnChannelPricing($channelPricing);
-        }
-    }
+        $this->catalogPromotionClearer->clearVariant($variant);
 
-    private function reapplyOnChannelPricing(ChannelPricingInterface $channelPricing): void
-    {
-        $appliedPromotions = $channelPricing->getAppliedPromotions()->toArray();
-        if (empty($appliedPromotions)) {
-            return;
-        }
-        $this->catalogPromotionClearer->clearChannelPricing($channelPricing);
-        foreach ($appliedPromotions as $catalogPromotion) {
-            /** @var CatalogPromotionInterface|null $catalogPromotion */
-            if (!$catalogPromotion->isEnabled()) {
-                continue;
+        foreach ($catalogPromotions as $catalogPromotion) {
+            $scopes = $catalogPromotion->getScopes();
+
+            foreach ($scopes as $scope) {
+                if ($scope->getType() === ForTaxonsScopeVariantsProvider::TYPE) {
+                    /** @var ProductInterface $product */
+                    $product = $variant->getProduct();
+
+                    if (!$product->getTaxons()->exists(
+                        fn(int $key, TaxonInterface $taxon): bool => \in_array($taxon->getCode(), $scope->getConfiguration()['taxons'])
+                    )) {
+                        continue 2;
+                    }
+                }
+
+                $this->catalogPromotionApplicator->applyOnVariant($variant, $catalogPromotion);
             }
-
-            $this->catalogPromotionApplicator->applyOnChannelPricing($channelPricing, $catalogPromotion);
         }
     }
 }

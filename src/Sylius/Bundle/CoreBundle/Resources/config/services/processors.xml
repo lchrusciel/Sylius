@@ -19,10 +19,8 @@
             id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface"
             class="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessor"
         >
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface" />
-            <argument type="service" id="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface" />
-            <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
+            <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="sylius.event_bus" />
         </service>
 
         <service

@@ -15,38 +15,38 @@ namespace Sylius\Bundle\CoreBundle\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessorInterface;
+use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
+use Sylius\Component\Core\Event\ProductVariantsToUpdated;
 use Sylius\Component\Core\Event\ProductVariantUpdated;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 final class ProductVariantUpdatedListener
 {
-    private ProductVariantRepositoryInterface $productVariantRepository;
-
-    private ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor;
-
-    private EntityManagerInterface $entityManager;
-
     public function __construct(
-        ProductVariantRepositoryInterface $productVariantRepository,
-        ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor,
-        EntityManagerInterface $entityManager
+        private ProductVariantRepositoryInterface $productVariantRepository,
+        private ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor,
+        private EntityManagerInterface $entityManager,
+        private EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
+        private iterable $defaultCriteria = []
     ) {
-        $this->productVariantRepository = $productVariantRepository;
-        $this->productVariantCatalogPromotionsProcessor = $productVariantCatalogPromotionsProcessor;
-        $this->entityManager = $entityManager;
     }
 
-    public function __invoke(ProductVariantUpdated $event): void
+    public function __invoke(ProductVariantsToUpdated $event): void
     {
         /** @var ProductVariantInterface|null $variant */
-        $variant = $this->productVariantRepository->findOneBy(['code' => $event->code]);
-        if ($variant === null) {
+        $variants = $this->productVariantRepository->findBy(['code' => $event->codes]);
+        if ($variants === null) {
             return;
         }
 
-        $this->productVariantCatalogPromotionsProcessor->process($variant);
+        $catalogPromotions = $this->catalogPromotionsProvider->provide($this->defaultCriteria);
+
+        foreach ($variants as $variant) {
+            $this->productVariantCatalogPromotionsProcessor->process($variant, $catalogPromotions);
+        }
 
         $this->entityManager->flush();
+        $this->entityManager->clear();
     }
 }

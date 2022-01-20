@@ -17,5 +17,5 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 interface ProductVariantCatalogPromotionsProcessorInterface
 {
-    public function process(ProductVariantInterface $variant): void;
+    public function process(ProductVariantInterface $variant, array $catalogPromotions): void;
 }

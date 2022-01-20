@@ -13,38 +13,26 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
 
-use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
-use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Event\ProductVariantsToUpdated;
+use Sylius\Component\Core\Event\ProductVariantUpdated;
+use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcessorInterface
 {
-    private CatalogPromotionClearerInterface $catalogPromotionClearer;
-
-    private CatalogPromotionProcessorInterface $catalogPromotionProcessor;
-
-    private EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider;
-
-    private iterable $defaultCriteria;
-
     public function __construct(
-        CatalogPromotionClearerInterface $catalogPromotionClearer,
-        CatalogPromotionProcessorInterface $catalogPromotionProcessor,
-        EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
-        iterable $defaultCriteria = []
+        private ProductVariantRepositoryInterface $productVariantRepository,
+        private MessageBusInterface $messageBus
     ) {
-        $this->catalogPromotionClearer = $catalogPromotionClearer;
-        $this->catalogPromotionProcessor = $catalogPromotionProcessor;
-        $this->catalogPromotionsProvider = $catalogPromotionsProvider;
-        $this->defaultCriteria = $defaultCriteria;
     }
 
     public function process(): void
     {
-        $this->catalogPromotionClearer->clear();
-        $eligibleCatalogPromotions = $this->catalogPromotionsProvider->provide($this->defaultCriteria);
+        $codes = $this->productVariantRepository->createQueryBuilder('o')->select('o.code')->getQuery()->getArrayResult();
 
-        foreach ($eligibleCatalogPromotions as $catalogPromotion) {
-            $this->catalogPromotionProcessor->process($catalogPromotion);
+        $batchedCodes = array_chunk($codes, 5200);
+        foreach ($batchedCodes as $chunk) {
+            $this->messageBus->dispatch(new ProductVariantsToUpdated(array_column($chunk, 'code')));
         }
     }
 }

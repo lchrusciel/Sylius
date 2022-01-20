@@ -148,6 +148,8 @@
             <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessorInterface" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface" />
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 
