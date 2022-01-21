@@ -30,7 +30,7 @@ final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcess
     {
         $codes = $this->productVariantRepository->createQueryBuilder('o')->select('o.code')->getQuery()->getArrayResult();
 
-        $batchedCodes = array_chunk($codes, 5200);
+        $batchedCodes = array_chunk($codes, 580);
         foreach ($batchedCodes as $chunk) {
             $this->messageBus->dispatch(new ProductVariantsToUpdated(array_column($chunk, 'code')));
         }
