@@ -1,3 +1,22 @@
+# UPGRADE FROM `v1.10.x` TO `v1.10.12`
+1. Order Processors' priorities have changed and `sylius.order_processing.order_prices_recalculator` has now a higher priority than `sylius.order_processing.order_shipment_processor`.
+
+Previous priorities:
+```shell
+sylius.order_processing.order_adjustments_clearer          60         Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer   
+sylius.order_processing.order_shipment_processor           50         Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor    
+sylius.order_processing.order_prices_recalculator          40         Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator   
+...     
+```
+
+Curren priorities:
+```shell
+sylius.order_processing.order_adjustments_clearer          60         Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer   
+sylius.order_processing.order_prices_recalculator          50         Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator   
+sylius.order_processing.order_shipment_processor           40         Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor    
+...     
+```
+
 # UPGRADE FROM `v1.10.8` TO `v1.10.10`
 
 1. Field `createdByGuest` has been added to `Sylius\Component\Core\Model\Order`, this change will allow us to distinguish carts 
