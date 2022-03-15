@@ -16,12 +16,12 @@ Feature: Seeing estimated shipping costs based on total weight
         And this shipping method is only available for orders with a total weight less or equal to 1.0
         And I am a logged in customer
 
-    @ui
+    @ui @api
     Scenario: Seeing estimated shipping cost that handle heavy goods
         When I add product "Jacket for the Lochness Monster" to the cart
         Then my cart estimated shipping cost should be "$200.00"
 
-    @ui
+    @ui @api
     Scenario: Seeing estimated shipping cost that handle cheap goods
         When I add product "T-Shirt for Tinkerbell" to the cart
         Then my cart estimated shipping cost should be "$2.00"
