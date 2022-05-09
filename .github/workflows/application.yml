@@ -79,6 +79,21 @@ jobs:
                 run: composer validate --strict --no-check-version
                 if: always() && steps.end-of-setup.outcome == 'success'
 
+            - 
+                name: Get previous composer.lock
+                uses: actions/download-artifact@v3
+                id: previous-composer-lock
+                with:
+                    name: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer.lock
+                    path: var/cache/
+
+            -   
+                name: Generate composer diff
+                if: steps.previous-composer-lock.outcome == 'success'
+                uses: IonBazan/composer-diff-action@v1
+                with:
+                    base: var/cache/composer.lock
+
             -
                 name: Check for security vulnerabilities
                 run: symfony security:check
@@ -117,6 +132,12 @@ jobs:
                     composer dump-autoload
                     composer-require-checker check --config-file=composer-require-checker.json
                 if: always() && steps.end-of-setup.outcome == 'success'
+
+
+            -   uses: actions/upload-artifact@v3
+                with:
+                    name: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer.lock
+                    path: composer.lock
 
     architecture-tests:
         runs-on: ubuntu-latest
