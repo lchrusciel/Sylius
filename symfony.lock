@@ -645,6 +645,9 @@
     "sylius-labs/sensio-distribution-bundle": {
         "version": "v6.0.1"
     },
+    "sylius/calendar": {
+        "version": "v0.3.0"
+    },
     "sylius/fixtures-bundle": {
         "version": "v1.4.1"
     },
