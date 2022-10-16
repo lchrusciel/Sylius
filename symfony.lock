@@ -376,9 +376,6 @@
     "pagerfanta/pagerfanta": {
         "version": "v3.5.2"
     },
-    "paragonie/random_compat": {
-        "version": "v2.0.18"
-    },
     "payum/iso4217": {
         "version": "1.0.1"
     },

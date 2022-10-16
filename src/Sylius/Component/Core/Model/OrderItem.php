@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Order\Model\OrderItem as BaseOrderItem;
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
+use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface as BaseOrderItemUnitInterface;
 use Webmozart\Assert\Assert;
 
@@ -31,6 +33,29 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
 
     /** @var string|null */
     protected $variantName;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->units = new ArrayCollection([new OrderItemUnit($this)]);
+    }
+
+    public function setQuantity(int $quantity): void
+    {
+        $this->quantity = $quantity;
+        $this->recalculateTotal();
+    }
+
+    public function addUnit(OrderItemUnitInterface $itemUnit): void
+    {
+        throw new \InvalidArgumentException('Cannot add unit to order item');
+    }
+
+    public function removeUnit(OrderItemUnitInterface $itemUnit): void
+    {
+        throw new \InvalidArgumentException('Cannot remove unit to order item');
+    }
 
     public function getVersion(): ?int
     {
@@ -97,7 +122,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
             /** @var OrderItemUnitInterface $unit */
             Assert::isInstanceOf($unit, OrderItemUnitInterface::class);
 
-            $taxTotal += $unit->getTaxTotal();
+            $taxTotal = $unit->getTaxTotal() * $this->getQuantity();
         }
 
         return $taxTotal;
@@ -143,10 +168,6 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
 
     public function getSubtotal(): int
     {
-        return array_reduce(
-            $this->getUnits()->toArray(),
-            fn (int $subtotal, BaseOrderItemUnitInterface $unit) => $subtotal + $this->unitPrice + $unit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT),
-            0,
-        );
+        return ($this->unitPrice + $this->getUnits()[0]->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)) * $this->quantity;
     }
 }

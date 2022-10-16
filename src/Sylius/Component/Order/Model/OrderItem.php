@@ -144,11 +144,12 @@ class OrderItem implements OrderItemInterface
 
     public function recalculateUnitsTotal(): void
     {
-        $this->unitsTotal = 0;
-
-        foreach ($this->units as $unit) {
-            $this->unitsTotal += $unit->getTotal();
-        }
+        $this->unitsTotal = $this->unitPrice * $this->quantity;
+//        $this->unitsTotal = 0;
+//
+//        foreach ($this->units as $unit) {
+//            $this->unitsTotal += $unit->getTotal();
+//        }
 
         $this->recalculateTotal();
     }
