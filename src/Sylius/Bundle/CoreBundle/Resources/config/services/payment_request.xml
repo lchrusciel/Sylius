@@ -16,6 +16,7 @@
         <import resource="payment_request/*.xml" />
         <import resource="payment_request/payum/*.xml" />
         <import resource="payment_request/offline/*.xml" />
+        <import resource="payment_request/tpay/*.xml" />
     </imports>
 
     <services>

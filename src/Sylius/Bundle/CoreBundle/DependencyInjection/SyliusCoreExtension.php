@@ -200,6 +200,8 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
+        $loader->load('services/integrations/tpay.xml');
+
         if (class_exists(OfflineGatewayFactory::class)) {
             $loader->load('services/integrations/payum/offline.xml');
         }

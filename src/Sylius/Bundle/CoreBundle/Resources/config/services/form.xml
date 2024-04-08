@@ -193,6 +193,11 @@
             <tag name="form.type" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\Form\Type\TpayGatewayConfigurationType">
+            <tag name="form.type" />
+            <tag name="sylius.gateway_configuration_type" type="tpay" label="Tpay" />
+        </service>
+
         <!-- promotions -->
         <service id="sylius.form.type.promotion_rule.customer_group_configuration" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\CustomerGroupConfigurationType">
             <tag name="form.type" />
