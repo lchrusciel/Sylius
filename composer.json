@@ -136,6 +136,7 @@
         "symfony/webpack-encore-bundle": "^1.15",
         "symfony/workflow": "^5.4.21 || ^6.4",
         "symfony/yaml": "^5.4.21 || ^6.4",
+        "tpay-com/tpay-openapi-php": "^1.7",
         "twig/intl-extra": "^2.12 || ^3.4",
         "twig/twig": "^2.12 || ^3.3",
         "webmozart/assert": "^1.9",
