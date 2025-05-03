@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionAction;
 
-use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
-use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\ActionValidatorInterface;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionAction;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
@@ -66,6 +64,6 @@ final class FixedDiscountActionValidator implements ActionValidatorInterface
 
     private function isChannelConfigured(string $channelCode, array $configuration): bool
     {
-        return (isset($configuration[$channelCode]) && isset($configuration[$channelCode]['amount']));
+        return isset($configuration[$channelCode]) && isset($configuration[$channelCode]['amount']);
     }
 }
