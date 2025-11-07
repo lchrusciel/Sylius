@@ -210,7 +210,7 @@
         "friends-of-behat/symfony-extension": "^2.1",
         "friends-of-behat/variadic-extension": "^1.3",
         "hwi/oauth-bundle": "^1.1",
-        "lchrusciel/api-test-case": "^5.0",
+        "lchrusciel/api-test-case": "dev-claude/refactor-codebase-011CUSVyLQS3vFLtmKdXfUEB",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "mikey179/vfsstream": "^1.6",
@@ -219,7 +219,7 @@
         "phpspec/phpspec": "^7.2",
         "phpstan/phpstan": "1.5.4",
         "phpstan/phpstan-doctrine": "1.3.2",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^8.5 || ^9.0",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "psalm/plugin-mockery": "0.7.0",
         "psr/event-dispatcher": "^1.0",
@@ -239,6 +239,13 @@
         "ext-mbstring": "For better performance than using Symfony Polyfill Component",
         "hwi/oauth-bundle": "If you want to use Facebook login (see https://docs.sylius.com/en/latest/cookbook/shop/facebook-login.html)"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/lchrusciel/ApiTestCase.git",
+            "no-api": true
+        }
+    ],
     "config": {
         "preferred-install": {
             "*": "dist"
